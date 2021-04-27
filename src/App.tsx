@@ -5,10 +5,13 @@ import { generateSoringSteps } from "./sortingAlgorithms";
 import { Graph } from "./components/Graph";
 import { Bar } from "./types";
 import { shuffleArray } from "./utilities";
+import { PlayerControl } from "./components/PlayerControl";
 
 const Container = styled.div`
   padding: 0.5rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const generateRandomGraphData = () =>
@@ -85,20 +88,16 @@ const App = () => {
 
   return (
     <Container>
-      <button onClick={handleRandom} disabled={Boolean(playTimeout)}>
-        Random
-      </button>
-      <button onClick={handlePrevious} disabled={Boolean(playTimeout)}>
-        {"<"}
-      </button>
-      {playTimeout && <button onClick={handlePause}>Pause</button>}
-      {!playTimeout && <button onClick={handlePlay}>Play</button>}
-      <button onClick={handleNext} disabled={Boolean(playTimeout)}>
-        {">"}
-      </button>
-      <button disabled>{graphDataStep}</button>
-
       <Graph data={graphDataSteps[graphDataStep]} />
+      <PlayerControl
+        graphDataStep={graphDataStep}
+        isPlaying={Boolean(playTimeout)}
+        onPrevious={handlePrevious}
+        onPause={handlePause}
+        onPlay={handlePlay}
+        onNext={handleNext}
+        onRandom={handleRandom}
+      />
     </Container>
   );
 };
