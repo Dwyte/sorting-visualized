@@ -2,9 +2,17 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #040404;
 }
