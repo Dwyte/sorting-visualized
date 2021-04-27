@@ -1,7 +1,9 @@
-import { Graph } from "./components/Graph";
-import styled from "styled-components";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
 import { generateSoringSteps } from "./sortingAlgorithms";
+import { Graph } from "./components/Graph";
+import { Bar } from "./types";
 
 const Container = styled.div`
   padding: 0.5rem;
@@ -9,13 +11,16 @@ const Container = styled.div`
 `;
 
 const App = () => {
-  const [graphData, setGraphData] = useState<number[]>(
+  const [graphData, setGraphData] = useState<Bar[]>(
     Array(100)
       .fill(0)
-      .map(() => Math.round(Math.max(Math.random(), 0.01) * 100))
+      .map((_, index) => ({
+        id: index,
+        value: Math.round(Math.max(Math.random(), 0.01) * 100),
+      }))
   );
 
-  const [graphDataSteps, setGraphDataSteps] = useState<number[][]>([graphData]);
+  const [graphDataSteps, setGraphDataSteps] = useState<Bar[][]>([graphData]);
   const [graphDataStep, setGraphDataStep] = useState<number>(0);
 
   useEffect(() => {

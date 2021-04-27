@@ -8,9 +8,9 @@ export const Container = styled.div`
   height: 100%;
 `;
 
-export const Bar = styled.div<{ value: number }>`
+export const BarItem = styled.div<{ value: number; color?: string }>`
+  background-color: ${({ color }) => color || "white"};
   height: ${({ value }) => value}%;
-  background: #fff;
   margin: 0 2px;
   flex: 1;
 `;

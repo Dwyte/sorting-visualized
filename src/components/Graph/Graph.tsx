@@ -1,14 +1,15 @@
-import { Container, Bar } from "./styles";
+import { Container, BarItem } from "./styles";
+import { Bar } from "../../types";
 
 interface Props {
-  data: number[];
+  data: Bar[];
 }
 
 export const Graph: React.FC<Props> = ({ data }) => {
   return (
     <Container>
-      {data.map((value) => (
-        <Bar value={value} />
+      {data.map((bar: Bar) => (
+        <BarItem key={bar.id} value={bar.value} color={bar.color} />
       ))}
     </Container>
   );
