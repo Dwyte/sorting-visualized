@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { generateSoringSteps } from "./sortingAlgorithms";
@@ -86,17 +86,23 @@ const App = () => {
     }
   }, [graphDataStep, graphDataSteps.length]);
 
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGraphDataStep(parseInt(event.target.value));
+  };
+
   return (
     <Container>
       <Graph data={graphDataSteps[graphDataStep]} />
       <PlayerControl
-        graphDataStep={graphDataStep}
         isPlaying={Boolean(playTimeout)}
+        graphDataStep={graphDataStep}
+        graphDataStepsLength={graphDataSteps.length}
         onPrevious={handlePrevious}
         onPause={handlePause}
         onPlay={handlePlay}
         onNext={handleNext}
         onRandom={handleRandom}
+        onSliderChange={handleSliderChange}
       />
     </Container>
   );

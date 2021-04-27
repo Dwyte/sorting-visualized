@@ -1,24 +1,30 @@
+import { Slider, Container } from "./styles";
+
 interface Props {
-  graphDataStep: number;
   isPlaying: boolean;
+  graphDataStep: number;
+  graphDataStepsLength: number;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
   onPlay: React.MouseEventHandler<HTMLButtonElement>;
   onPause: React.MouseEventHandler<HTMLButtonElement>;
   onNext: React.MouseEventHandler<HTMLButtonElement>;
+  onSliderChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export const PlayerControl: React.FC<Props> = ({
-  graphDataStep,
   isPlaying,
+  graphDataStep,
+  graphDataStepsLength,
   onRandom,
   onPrevious,
   onPlay,
   onPause,
   onNext,
+  onSliderChange,
 }) => {
   return (
-    <div>
+    <Container>
       <button onClick={onRandom} disabled={isPlaying}>
         Random
       </button>
@@ -31,6 +37,14 @@ export const PlayerControl: React.FC<Props> = ({
         {">"}
       </button>
       <button disabled>{graphDataStep}</button>
-    </div>
+
+      <Slider
+        type="range"
+        min={0}
+        max={graphDataStepsLength - 1}
+        value={graphDataStep}
+        onChange={onSliderChange}
+      />
+    </Container>
   );
 };
