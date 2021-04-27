@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { generateSoringSteps } from "./sortingAlgorithms";
 import { Graph } from "./components/Graph";
 import { Bar } from "./types";
+import { shuffleArray } from "./utilities";
 
 const Container = styled.div`
   padding: 0.5rem;
@@ -11,12 +12,14 @@ const Container = styled.div`
 `;
 
 const generateRandomGraphData = () =>
-  Array(50)
-    .fill(0)
-    .map((_, index) => ({
-      id: index,
-      value: Math.round(Math.max(Math.random(), 0.01) * 100),
-    }));
+  shuffleArray(
+    Array(100)
+      .fill(0)
+      .map((_, index) => ({
+        id: index,
+        value: index + 1,
+      }))
+  );
 
 const App = () => {
   const [graphData, setGraphData] = useState<Bar[]>(generateRandomGraphData());
