@@ -59,7 +59,7 @@ const App = () => {
 
   const handlePlay = () => {
     if (!playTimeout) {
-      setPlayTimeout(setInterval(handleNext, 10));
+      setPlayTimeout(setInterval(handleNext, 1));
     }
   };
 
@@ -69,6 +69,19 @@ const App = () => {
       setPlayTimeout(null);
     }
   };
+
+  useEffect(() => {
+    if (graphDataStep === graphDataSteps.length - 1) {
+      setPlayTimeout((currentPlayTimeout) => {
+        if (currentPlayTimeout) {
+          clearTimeout(currentPlayTimeout);
+          return null;
+        }
+
+        return currentPlayTimeout;
+      });
+    }
+  }, [graphDataStep, graphDataSteps.length]);
 
   return (
     <Container>
