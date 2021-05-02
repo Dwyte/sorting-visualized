@@ -1,10 +1,44 @@
-import { Bar } from "./types";
+import { Bar, SortingAlgorithm } from "./types";
 
-export const generateSoringSteps = (arrayToSort: Bar[]): Bar[][] => {
-  /**
-   * Selection Sort.
-   */
+const deepCopyArray = (arrayToCopy: Bar[]) => {
+  const deepCopy: Bar[] = arrayToCopy.map((bar: Bar) => {
+    return { ...bar };
+  });
 
+  return deepCopy;
+};
+
+export const bubbleSort = (arrayToSort: Bar[]): Bar[][] => {
+  const arrayToSortCopy = deepCopyArray(arrayToSort);
+  const sortingSteps = [deepCopyArray(arrayToSort)];
+
+  for (let n = arrayToSortCopy.length; n > 0; n--) {
+    for (let i = 0, j = 1; j < n; i++, j++) {
+      const comparisonStep = deepCopyArray(arrayToSortCopy);
+      comparisonStep[i].color = "red";
+      comparisonStep[j].color = "red";
+      sortingSteps.push(comparisonStep);
+
+      if (arrayToSortCopy[i].value > arrayToSortCopy[j].value) {
+        const temp = arrayToSortCopy[i];
+        arrayToSortCopy[i] = arrayToSortCopy[j];
+        arrayToSortCopy[j] = temp;
+
+        const swapStep = deepCopyArray(arrayToSortCopy);
+        swapStep[i].color = "orange";
+        swapStep[j].color = "orange";
+        sortingSteps.push(swapStep);
+      }
+    }
+
+    arrayToSortCopy[n - 1].color = "orange";
+  }
+
+  sortingSteps.push([...arrayToSortCopy]);
+  return sortingSteps;
+};
+
+export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
   const arrayToSortCopy: Bar[] = [...arrayToSort];
   const sortingSteps: Bar[][] = [[...arrayToSortCopy]];
 
@@ -48,4 +82,18 @@ export const generateSoringSteps = (arrayToSort: Bar[]): Bar[][] => {
   }
 
   return sortingSteps;
+};
+
+export const generateSoringSteps = (
+  arrayToSort: Bar[],
+  algorithm: SortingAlgorithm = "Selection"
+): Bar[][] => {
+  switch (algorithm) {
+    case "Bubble":
+      return bubbleSort(arrayToSort);
+    case "Selection":
+      return selectionSort(arrayToSort);
+    default:
+      throw Error("Algorithm not implemented.");
+  }
 };
