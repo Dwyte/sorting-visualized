@@ -4,4 +4,4 @@ export interface Bar {
   color?: string;
 }
 
-export type SortingAlgorithm = "Bubble" | "Selection";
+export type SortingAlgorithm = "Bubble" | "Selection" | "Insertion";
