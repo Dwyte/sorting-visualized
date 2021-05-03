@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { generateSoringSteps } from "./sortingAlgorithms";
 import { Graph } from "./components/Graph";
-import { Bar } from "./types";
+import { Bar, SortingAlgorithm } from "./types";
 import { shuffleArray } from "./utilities";
 import { PlayerControl } from "./components/PlayerControl";
 
@@ -31,10 +31,14 @@ const App = () => {
 
   const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
 
+  const [sortingAlgorithm, setSortingAlgorithm] = useState<SortingAlgorithm>(
+    "Merge"
+  );
+
   useEffect(() => {
-    setGraphDataSteps(generateSoringSteps(graphData));
+    setGraphDataSteps(generateSoringSteps(graphData, sortingAlgorithm));
     setGraphDataStep(0);
-  }, [graphData]);
+  }, [graphData, sortingAlgorithm]);
 
   const handlePrevious = () => {
     setGraphDataStep((currentGraphDataStep) => {
@@ -89,10 +93,17 @@ const App = () => {
     setGraphDataStep(parseInt(event.target.value));
   };
 
+  const handleSortingAlgorithmChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSortingAlgorithm(event.target.value as SortingAlgorithm);
+  };
+
   return (
     <Container>
       <Graph data={graphDataSteps[graphDataStep]} />
       <PlayerControl
+        sortingAlgorithm={sortingAlgorithm}
         isPlaying={Boolean(playTimeout)}
         graphDataStep={graphDataStep}
         graphDataStepsLength={graphDataSteps.length}
@@ -102,6 +113,7 @@ const App = () => {
         onNext={handleNext}
         onRandom={handleRandom}
         onSliderChange={handleSliderChange}
+        onSelectAlgorithm={handleSortingAlgorithmChange}
       />
     </Container>
   );
