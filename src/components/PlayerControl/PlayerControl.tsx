@@ -1,5 +1,5 @@
-import { sortingAlgorithms } from "../../constants";
-import { SortingAlgorithm } from "../../types";
+import { playSpeedConfigs, sortingAlgorithms } from "../../constants";
+import { PlaySpeedConfig, SortingAlgorithm } from "../../types";
 import { Slider, Container } from "./styles";
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
   graphDataStep: number;
   graphDataStepsLength: number;
   sortingAlgorithm: SortingAlgorithm;
+  playSpeedConfig: PlaySpeedConfig;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
   onPlay: React.MouseEventHandler<HTMLButtonElement>;
@@ -14,6 +15,7 @@ interface Props {
   onNext: React.MouseEventHandler<HTMLButtonElement>;
   onSliderChange: React.ChangeEventHandler<HTMLInputElement>;
   onSelectAlgorithm: React.ChangeEventHandler<HTMLSelectElement>;
+  onSelectPlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 export const PlayerControl: React.FC<Props> = ({
@@ -21,6 +23,7 @@ export const PlayerControl: React.FC<Props> = ({
   graphDataStep,
   graphDataStepsLength,
   sortingAlgorithm,
+  playSpeedConfig,
   onRandom,
   onPrevious,
   onPlay,
@@ -28,6 +31,7 @@ export const PlayerControl: React.FC<Props> = ({
   onNext,
   onSliderChange,
   onSelectAlgorithm,
+  onSelectPlaySpeed,
 }) => {
   return (
     <Container>
@@ -37,9 +41,12 @@ export const PlayerControl: React.FC<Props> = ({
         disabled={isPlaying}
       >
         {sortingAlgorithms.map((algorithm: SortingAlgorithm) => (
-          <option value={algorithm}>{algorithm} Sort</option>
+          <option key={algorithm} value={algorithm}>
+            {algorithm} Sort
+          </option>
         ))}
       </select>
+
       <button onClick={onRandom} disabled={isPlaying}>
         Random
       </button>
@@ -51,7 +58,25 @@ export const PlayerControl: React.FC<Props> = ({
       <button onClick={onNext} disabled={isPlaying}>
         {">"}
       </button>
-      <button disabled>{graphDataStep}</button>
+
+      <select
+        value={playSpeedConfig.playSpeed}
+        onChange={onSelectPlaySpeed}
+        disabled={isPlaying}
+      >
+        {playSpeedConfigs.map((playSpeedConfigs: PlaySpeedConfig) => (
+          <option
+            key={playSpeedConfigs.playSpeed}
+            value={playSpeedConfigs.playSpeed}
+          >
+            {playSpeedConfigs.playSpeed}x
+          </option>
+        ))}
+      </select>
+
+      <button style={{ width: "50px" }} disabled>
+        {graphDataStep}
+      </button>
 
       <Slider
         type="range"
