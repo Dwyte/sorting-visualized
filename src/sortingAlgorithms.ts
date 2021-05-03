@@ -74,15 +74,15 @@ export const bubbleSort = (arrayToSort: Bar[]): Bar[][] => {
 };
 
 export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
-  const arrayToSortCopy: Bar[] = [...arrayToSort];
-  const sortingSteps: Bar[][] = [[...arrayToSortCopy]];
+  const arrayToSortCopy = deepCopyArray(arrayToSort);
+  const sortingSteps = [deepCopyArray(arrayToSort)];
 
   for (let i = 0; i < arrayToSortCopy.length; i++) {
     let minimum = Infinity;
     let minimumIndex = i;
 
     for (let j = i; j < arrayToSortCopy.length; j++) {
-      const currentStep = arrayToSortCopy.map((element) => ({ ...element }));
+      const currentStep = deepCopyArray(arrayToSortCopy);
       currentStep[j].color = "red";
       sortingSteps.push(currentStep);
 
@@ -92,8 +92,8 @@ export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
           color: "white",
         };
 
-        arrayToSortCopy[j] = { ...arrayToSortCopy[j], color: "orange" };
-        sortingSteps.push(arrayToSortCopy.map((element) => ({ ...element })));
+        arrayToSortCopy[j].color = "orange";
+        sortingSteps.push(deepCopyArray(arrayToSortCopy));
 
         minimumIndex = j;
         minimum = arrayToSortCopy[j].value;
@@ -101,19 +101,11 @@ export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
     }
 
     const temp: Bar = arrayToSortCopy[i];
-
     arrayToSortCopy[i] = arrayToSortCopy[minimumIndex];
     arrayToSortCopy[minimumIndex] = temp;
-    sortingSteps.push([...arrayToSortCopy]);
-  }
+    arrayToSortCopy[i].color = "green";
 
-  for (let i = 0; i < arrayToSortCopy.length; i++) {
-    arrayToSortCopy[i] = {
-      ...arrayToSortCopy[i],
-      color: "white",
-    };
-
-    sortingSteps.push(arrayToSortCopy.map((element) => ({ ...element })));
+    sortingSteps.push(deepCopyArray(arrayToSortCopy));
   }
 
   return sortingSteps;
