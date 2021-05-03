@@ -111,9 +111,80 @@ export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
   return sortingSteps;
 };
 
+export const mergeSort = (arrayToSort: Bar[]): Bar[][] => {
+  const arrayToSortCopy = deepCopyArray(arrayToSort);
+  const sortingSteps = [deepCopyArray(arrayToSort)];
+
+  const merge = (array: Bar[], low: number, mid: number, high: number) => {
+    const mergedArray = [];
+
+    let fromA: number = low;
+    let toA: number = mid;
+
+    let fromB: number = mid;
+    let toB: number = high;
+
+    let i: number = fromA;
+    let j: number = fromB;
+
+    while (i < toA && j < toB) {
+      const compareStep = deepCopyArray(array);
+      compareStep[i].color = "red";
+      compareStep[j].color = "red";
+      sortingSteps.push(compareStep);
+
+      const currentA: Bar = array[i];
+      const currentB: Bar = array[j];
+
+      if (currentA.value > currentB.value) {
+        mergedArray.push(currentB);
+        j++;
+      } else {
+        mergedArray.push(currentA);
+        i++;
+      }
+    }
+
+    while (i < toA) {
+      mergedArray.push(array[i]);
+      i++;
+    }
+
+    while (j < toB) {
+      mergedArray.push(array[j]);
+      j++;
+    }
+
+    for (let i = low, j = 0; i < high; i++, j++) {
+      array[i] = mergedArray[j];
+
+      const copyStep = deepCopyArray(array);
+      copyStep[i].color = "green";
+      sortingSteps.push(copyStep);
+    }
+  };
+
+  const sort = (array: Bar[], from: number = 0, to: number = array.length) => {
+    if (to - from <= 1) return;
+
+    const low: number = from;
+    const high: number = to;
+    const mid: number = Math.floor((high + low) / 2);
+
+    sort(array, low, mid);
+    sort(array, mid, high);
+    merge(array, low, mid, high);
+  };
+
+  sort(arrayToSortCopy);
+  sortingSteps.push(deepCopyArray(arrayToSortCopy));
+  console.log(sortingSteps);
+  return sortingSteps;
+};
+
 export const generateSoringSteps = (
   arrayToSort: Bar[],
-  algorithm: SortingAlgorithm = "Selection"
+  algorithm: SortingAlgorithm = "Merge"
 ): Bar[][] => {
   switch (algorithm) {
     case "Bubble":
@@ -122,6 +193,8 @@ export const generateSoringSteps = (
       return selectionSort(arrayToSort);
     case "Insertion":
       return insertionSort(arrayToSort);
+    case "Merge":
+      return mergeSort(arrayToSort);
     default:
       throw Error("Algorithm not implemented.");
   }

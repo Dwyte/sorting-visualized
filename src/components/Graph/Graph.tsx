@@ -8,8 +8,8 @@ interface Props {
 export const Graph: React.FC<Props> = ({ data }) => {
   return (
     <Container>
-      {data.map((bar: Bar) => (
-        <BarItem key={bar.id} value={bar.value} color={bar.color} />
+      {data.map((bar: Bar, index: number) => (
+        <BarItem key={index} value={bar.value} color={bar.color} />
       ))}
     </Container>
   );

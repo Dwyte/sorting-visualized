@@ -19,7 +19,6 @@ const generateRandomGraphData = () =>
     Array(100)
       .fill(0)
       .map((_, index) => ({
-        id: index,
         value: index + 1,
       }))
   );
