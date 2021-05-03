@@ -159,7 +159,9 @@ export const mergeSort = (arrayToSort: Bar[]): Bar[][] => {
       array[i] = mergedArray[j];
 
       const copyStep = deepCopyArray(array);
-      copyStep[i].color = "green";
+      for (let k = low; k <= i; k++) {
+        copyStep[k].color = "green";
+      }
       sortingSteps.push(copyStep);
     }
   };
@@ -177,8 +179,6 @@ export const mergeSort = (arrayToSort: Bar[]): Bar[][] => {
   };
 
   sort(arrayToSortCopy);
-  sortingSteps.push(deepCopyArray(arrayToSortCopy));
-  console.log(sortingSteps);
   return sortingSteps;
 };
 
