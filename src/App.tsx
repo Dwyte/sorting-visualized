@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { generateSoringSteps } from "./sortingAlgorithms";
-import { Graph } from "./components/Graph";
-import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
-import { shuffleArray } from "./utilities";
 import { PlayerControl } from "./components/PlayerControl";
+import { Screen } from "./components/Screen";
+
+import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
+import { generateSoringSteps } from "./sortingAlgorithms";
 import { playSpeedConfigs } from "./constants";
+import { shuffleArray } from "./utilities";
 
 const Container = styled.div`
-  padding: 0.5rem;
-  height: 100%;
-  display: flex;
   flex-direction: column;
+  padding: 0.5rem;
+  display: flex;
+  height: 100%;
 `;
 
 const generateRandomGraphData = () =>
@@ -121,10 +122,15 @@ const App = () => {
 
   return (
     <Container>
-      <Graph data={graphDataSteps[graphDataStep]} />
+      <Screen
+        isPlaying={Boolean(playTimeout)}
+        sortingAlgorithm={sortingAlgorithm}
+        onSelectAlgorithm={handleSelectAlgorithm}
+        graphData={graphDataSteps[graphDataStep]}
+      />
+
       <PlayerControl
         playSpeedConfig={playSpeedConfig}
-        sortingAlgorithm={sortingAlgorithm}
         isPlaying={Boolean(playTimeout)}
         graphDataStep={graphDataStep}
         graphDataStepsLength={graphDataSteps.length}
@@ -134,7 +140,6 @@ const App = () => {
         onNext={handleNext}
         onRandom={handleRandom}
         onSliderChange={handleSliderChange}
-        onSelectAlgorithm={handleSelectAlgorithm}
         onSelectPlaySpeed={handleSelectPlaySpeed}
       />
     </Container>

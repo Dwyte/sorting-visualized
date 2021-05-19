@@ -1,12 +1,11 @@
-import { playSpeedConfigs, sortingAlgorithms } from "../../constants";
-import { PlaySpeedConfig, SortingAlgorithm } from "../../types";
+import { playSpeedConfigs } from "../../constants";
+import { PlaySpeedConfig } from "../../types";
 import { Slider, Container } from "./styles";
 
 interface Props {
   isPlaying: boolean;
   graphDataStep: number;
   graphDataStepsLength: number;
-  sortingAlgorithm: SortingAlgorithm;
   playSpeedConfig: PlaySpeedConfig;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
@@ -14,7 +13,6 @@ interface Props {
   onPause: React.MouseEventHandler<HTMLButtonElement>;
   onNext: React.MouseEventHandler<HTMLButtonElement>;
   onSliderChange: React.ChangeEventHandler<HTMLInputElement>;
-  onSelectAlgorithm: React.ChangeEventHandler<HTMLSelectElement>;
   onSelectPlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
@@ -22,7 +20,6 @@ export const PlayerControl: React.FC<Props> = ({
   isPlaying,
   graphDataStep,
   graphDataStepsLength,
-  sortingAlgorithm,
   playSpeedConfig,
   onRandom,
   onPrevious,
@@ -30,23 +27,10 @@ export const PlayerControl: React.FC<Props> = ({
   onPause,
   onNext,
   onSliderChange,
-  onSelectAlgorithm,
   onSelectPlaySpeed,
 }) => {
   return (
     <Container>
-      <select
-        value={sortingAlgorithm}
-        onChange={onSelectAlgorithm}
-        disabled={isPlaying}
-      >
-        {sortingAlgorithms.map((algorithm: SortingAlgorithm) => (
-          <option key={algorithm} value={algorithm}>
-            {algorithm} Sort
-          </option>
-        ))}
-      </select>
-
       <button onClick={onRandom} disabled={isPlaying}>
         Random
       </button>

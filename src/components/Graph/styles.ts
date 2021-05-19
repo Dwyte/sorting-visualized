@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  border: 1px solid #eee;
-  align-items: flex-end;
-  padding: 0.5rem;
-  display: flex;
   height: 100%;
+  display: flex;
+  align-items: flex-end;
 `;
 
 export const BarItem = styled.div<{ value: number; color?: string }>`
