@@ -13,7 +13,7 @@ interface Props {
   onSelectAlgorithm: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
-export const Screen: React.FC<Props> = ({
+export const Visualizer: React.FC<Props> = ({
   graphData,
   sortingAlgorithm,
   onSelectAlgorithm,

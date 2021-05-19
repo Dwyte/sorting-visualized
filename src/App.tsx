@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { PlayerControl } from "./components/PlayerControl";
-import { Screen } from "./components/Screen";
+import { Visualizer } from "./components/Visualizer";
 
 import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
 import { generateSoringSteps } from "./sortingAlgorithms";
@@ -124,7 +124,7 @@ const App = () => {
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
-        <Screen
+        <Visualizer
           sortingAlgorithm={sortingAlgorithm}
           onSelectAlgorithm={handleSelectAlgorithm}
           graphData={graphDataSteps[graphDataStep]}
