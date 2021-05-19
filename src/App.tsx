@@ -43,7 +43,7 @@ type AllSortingSteps = {
 };
 
 interface ReducerActions {
-  type: "change-algorithm";
+  type: "change-algorithm" | "change-visualizer-count";
   payload: any;
 }
 
@@ -53,6 +53,20 @@ const reducer = (state: SortingAlgorithm[], action: ReducerActions) => {
       const stateCopy = [...state];
       stateCopy[action.payload.index] = action.payload.algorithm;
       return stateCopy;
+    case "change-visualizer-count":
+      if (action.payload === 1) {
+        return [state[0]];
+      } else if (action.payload === 2) {
+        return [state[0], state[1] || "Merge"];
+      } else if (action.payload === 4) {
+        return [
+          state[0],
+          state[1] || "Merge",
+          state[2] || "Merge",
+          state[4] || "Merge",
+        ];
+      }
+      return state;
     default:
       return state;
   }
@@ -70,10 +84,7 @@ const App = () => {
 
   const [currentStep, setCurrentSortStep] = useState<number>(0);
 
-  const [activeAlgorithms, dispatch] = useReducer(reducer, [
-    "Merge",
-    "Selection",
-  ]);
+  const [activeAlgorithms, dispatch] = useReducer(reducer, ["Merge"]);
 
   const [playSpeedConfig, setPlaySpeedConfig] = useState<PlaySpeedConfig>(
     playSpeedConfigs[0]
@@ -94,8 +105,6 @@ const App = () => {
     return maxLength;
   }, [allSortingSteps, activeAlgorithms]);
 
-  const [visualizerCount, setVisualizerCount] = useState<VisualizerCount>(1);
-
   useEffect(() => {
     const newAllSortingSteps: AllSortingSteps = {};
     sortingAlgorithms.forEach((algorithm: SortingAlgorithm) => {
@@ -106,6 +115,7 @@ const App = () => {
     });
 
     setAllSortingSteps(newAllSortingSteps);
+    setCurrentSortStep(0);
   }, [dataToSort]);
 
   const moveGraphDataStep = (stepSize: number) => {
@@ -185,14 +195,19 @@ const App = () => {
     );
 
     if (newVisualizerCount) {
-      setVisualizerCount(newVisualizerCount as VisualizerCount);
+      dispatch({
+        type: "change-visualizer-count",
+        payload: newVisualizerCount,
+      });
     }
   };
 
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
-        <VisualizersGrid visualizerCount={visualizerCount}>
+        <VisualizersGrid
+          visualizerCount={activeAlgorithms.length as VisualizerCount}
+        >
           {activeAlgorithms.map((activeAlgorithm, index: number) => (
             <Visualizer
               sortingAlgorithm={activeAlgorithm}
@@ -214,7 +229,7 @@ const App = () => {
           currentStep={currentStep}
           playSpeedConfig={playSpeedConfig}
           totalSteps={totalSteps}
-          visualizerCount={visualizerCount}
+          visualizerCount={activeAlgorithms.length as VisualizerCount}
           onPrevious={handlePrevious}
           onPause={handlePause}
           onPlay={handlePlay}
