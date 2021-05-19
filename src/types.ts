@@ -3,7 +3,7 @@ export interface Bar {
   color?: string;
 }
 
-export type PlaySpeed = 1 | 2 | 3 | 4 | 5;
+export type PlaySpeed = 1 | 2 | 3 | 4 | 5 | 10;
 
 export interface PlaySpeedConfig {
   playSpeed: PlaySpeed;

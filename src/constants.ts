@@ -7,7 +7,7 @@ export const sortingAlgorithms: SortingAlgorithm[] = [
   "Selection",
 ];
 
-export const playSpeeds: PlaySpeed[] = [1, 2, 3, 4, 5];
+export const playSpeeds: PlaySpeed[] = [1, 2, 3, 4, 5, 10];
 
 export const playSpeedConfigs: PlaySpeedConfig[] = [
   {
@@ -34,6 +34,11 @@ export const playSpeedConfigs: PlaySpeedConfig[] = [
     playSpeed: 5,
     playStepSize: 5,
     playStepIntervalMS: 5,
+  },
+  {
+    playSpeed: 10,
+    playStepSize: 25,
+    playStepIntervalMS: 1,
   },
 ];
 
