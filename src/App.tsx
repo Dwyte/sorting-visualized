@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
 import styled from "styled-components";
 
 import { PlayerControl } from "./components/PlayerControl";
@@ -49,7 +49,10 @@ const App = () => {
 
   const [currentStep, setCurrentSortStep] = useState<number>(0);
 
-  const [activeAlgorithms, dispatch] = useReducer(reducer, ["Merge"]);
+  const [activeAlgorithms, dispatch] = useReducer(reducer, [
+    "Merge",
+    "Selection",
+  ]);
 
   const [playSpeedConfig, setPlaySpeedConfig] = useState<PlaySpeedConfig>(
     playSpeedConfigs[0]
@@ -57,7 +60,18 @@ const App = () => {
 
   const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
 
-  const sortingSteps = allSortingSteps?.[activeAlgorithms[0]] || [dataToSort];
+  const totalSteps: number = useMemo(() => {
+    let maxLength: number = 1;
+    if (allSortingSteps) {
+      activeAlgorithms.forEach((activeAlgorithm: SortingAlgorithm) => {
+        maxLength = Math.max(
+          allSortingSteps[activeAlgorithm]?.length || 1,
+          maxLength
+        );
+      });
+    }
+    return maxLength;
+  }, [allSortingSteps, activeAlgorithms]);
 
   useEffect(() => {
     const newAllSortingSteps: AllSortingSteps = {};
@@ -75,8 +89,7 @@ const App = () => {
     setCurrentSortStep((currentGraphDataStep) => {
       let newGraphDataStep = currentGraphDataStep + stepSize;
       if (newGraphDataStep < 0) newGraphDataStep = 0;
-      if (newGraphDataStep > sortingSteps.length - 1)
-        newGraphDataStep = sortingSteps.length - 1;
+      if (newGraphDataStep > totalSteps - 1) newGraphDataStep = totalSteps - 1;
 
       return newGraphDataStep;
     });
@@ -113,7 +126,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (currentStep === sortingSteps.length - 1) {
+    if (currentStep === totalSteps - 1) {
       setPlayTimeout((currentPlayTimeout) => {
         if (currentPlayTimeout) {
           clearTimeout(currentPlayTimeout);
@@ -123,7 +136,7 @@ const App = () => {
         return currentPlayTimeout;
       });
     }
-  }, [currentStep, sortingSteps.length]);
+  }, [currentStep, totalSteps]);
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentSortStep(parseInt(event.target.value));
@@ -153,7 +166,7 @@ const App = () => {
                 payload: { index, algorithm: event.target.value },
               })
             }
-            sortingSteps={sortingSteps}
+            sortingSteps={allSortingSteps?.[activeAlgorithm] || [dataToSort]}
             currentStep={currentStep}
           />
         ))}
@@ -161,7 +174,7 @@ const App = () => {
         <PlayerControl
           currentStep={currentStep}
           playSpeedConfig={playSpeedConfig}
-          totalSteps={sortingSteps.length}
+          totalSteps={totalSteps}
           onPrevious={handlePrevious}
           onPause={handlePause}
           onPlay={handlePlay}
