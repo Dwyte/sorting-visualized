@@ -26,6 +26,18 @@ const Container = styled.div`
   height: 100%;
 `;
 
+const VisualizersGrid = styled.div<{ visualizerCount: VisualizerCount }>`
+  grid-gap: 0.25rem;
+  display: grid;
+  height: 100%;
+
+  grid-template-columns: ${({ visualizerCount }) =>
+    visualizerCount >= 2 ? "1fr 1fr" : "1fr"};
+
+  grid-template-rows: ${({ visualizerCount }) =>
+    visualizerCount === 4 ? "1fr 1fr" : "1fr"};
+`;
+
 type AllSortingSteps = {
   [key in SortingAlgorithm]?: Bar[][];
 };
@@ -180,19 +192,23 @@ const App = () => {
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
-        {activeAlgorithms.map((activeAlgorithm, index: number) => (
-          <Visualizer
-            sortingAlgorithm={activeAlgorithm}
-            onSelectAlgorithm={(event: React.ChangeEvent<HTMLSelectElement>) =>
-              dispatch({
-                type: "change-algorithm",
-                payload: { index, algorithm: event.target.value },
-              })
-            }
-            sortingSteps={allSortingSteps?.[activeAlgorithm] || [dataToSort]}
-            currentStep={currentStep}
-          />
-        ))}
+        <VisualizersGrid visualizerCount={visualizerCount}>
+          {activeAlgorithms.map((activeAlgorithm, index: number) => (
+            <Visualizer
+              sortingAlgorithm={activeAlgorithm}
+              onSelectAlgorithm={(
+                event: React.ChangeEvent<HTMLSelectElement>
+              ) =>
+                dispatch({
+                  type: "change-algorithm",
+                  payload: { index, algorithm: event.target.value },
+                })
+              }
+              sortingSteps={allSortingSteps?.[activeAlgorithm] || [dataToSort]}
+              currentStep={currentStep}
+            />
+          ))}
+        </VisualizersGrid>
 
         <PlayerControl
           currentStep={currentStep}
