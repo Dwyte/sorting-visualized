@@ -8,13 +8,15 @@ import { Bar, SortingAlgorithm } from "../../types";
 import { Container } from "./style";
 
 interface Props {
-  graphData: Bar[];
   sortingAlgorithm: SortingAlgorithm;
   onSelectAlgorithm: React.ChangeEventHandler<HTMLSelectElement>;
+  sortingSteps: Bar[][];
+  currentStep: number;
 }
 
 export const Visualizer: React.FC<Props> = ({
-  graphData,
+  sortingSteps,
+  currentStep,
   sortingAlgorithm,
   onSelectAlgorithm,
 }) => {
@@ -28,7 +30,9 @@ export const Visualizer: React.FC<Props> = ({
         disabled={isPlaying}
       />
 
-      <Graph data={graphData} />
+      <Graph
+        data={sortingSteps[Math.min(currentStep, sortingSteps.length - 1)]}
+      />
     </Container>
   );
 };

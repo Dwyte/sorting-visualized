@@ -31,13 +31,16 @@ type AllSortingSteps = {
 };
 
 const App = () => {
-  const [graphData, setGraphData] = useState<Bar[]>(generateRandomGraphData());
+  const [dataToSort, setDataToSort] = useState<Bar[]>(
+    generateRandomGraphData()
+  );
+
   const [
     allSortingSteps,
     setAllSortingSteps,
   ] = useState<AllSortingSteps | null>(null);
 
-  const [graphDataStep, setGraphDataStep] = useState<number>(0);
+  const [currentStep, setCurrentSortStep] = useState<number>(0);
   const [sortingAlgorithm, setSortingAlgorithm] = useState<SortingAlgorithm>(
     "Merge"
   );
@@ -48,34 +51,37 @@ const App = () => {
 
   const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
 
-  const graphDataSteps = allSortingSteps?.[sortingAlgorithm] || [graphData];
+  const sortingSteps = allSortingSteps?.[sortingAlgorithm] || [dataToSort];
 
   useEffect(() => {
     const newAllSortingSteps: AllSortingSteps = {};
     sortingAlgorithms.forEach((algorithm: SortingAlgorithm) => {
-      newAllSortingSteps[algorithm] = generateSoringSteps(graphData, algorithm);
+      newAllSortingSteps[algorithm] = generateSoringSteps(
+        dataToSort,
+        algorithm
+      );
     });
 
     setAllSortingSteps(newAllSortingSteps);
-  }, [graphData]);
+  }, [dataToSort]);
 
   useEffect(() => {
-    setGraphDataStep(0);
-  }, [graphData, sortingAlgorithm]);
+    setCurrentSortStep(0);
+  }, [dataToSort, sortingAlgorithm]);
 
   const moveGraphDataStep = (stepSize: number) => {
-    setGraphDataStep((currentGraphDataStep) => {
+    setCurrentSortStep((currentGraphDataStep) => {
       let newGraphDataStep = currentGraphDataStep + stepSize;
       if (newGraphDataStep < 0) newGraphDataStep = 0;
-      if (newGraphDataStep > graphDataSteps.length - 1)
-        newGraphDataStep = graphDataSteps.length - 1;
+      if (newGraphDataStep > sortingSteps.length - 1)
+        newGraphDataStep = sortingSteps.length - 1;
 
       return newGraphDataStep;
     });
   };
 
   const handleRandom = () => {
-    setGraphData(generateRandomGraphData());
+    setDataToSort(generateRandomGraphData());
   };
 
   const handlePrevious = () => {
@@ -105,7 +111,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (graphDataStep === graphDataSteps.length - 1) {
+    if (currentStep === sortingSteps.length - 1) {
       setPlayTimeout((currentPlayTimeout) => {
         if (currentPlayTimeout) {
           clearTimeout(currentPlayTimeout);
@@ -115,10 +121,10 @@ const App = () => {
         return currentPlayTimeout;
       });
     }
-  }, [graphDataStep, graphDataSteps.length]);
+  }, [currentStep, sortingSteps.length]);
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGraphDataStep(parseInt(event.target.value));
+    setCurrentSortStep(parseInt(event.target.value));
   };
 
   const handleSelectAlgorithm = (
@@ -145,13 +151,14 @@ const App = () => {
         <Visualizer
           sortingAlgorithm={sortingAlgorithm}
           onSelectAlgorithm={handleSelectAlgorithm}
-          graphData={graphDataSteps[graphDataStep]}
+          sortingSteps={sortingSteps}
+          currentStep={currentStep}
         />
 
         <PlayerControl
-          currentStep={graphDataStep}
+          currentStep={currentStep}
           playSpeedConfig={playSpeedConfig}
-          totalSteps={graphDataSteps.length}
+          totalSteps={sortingSteps.length}
           onPrevious={handlePrevious}
           onPause={handlePause}
           onPlay={handlePlay}
