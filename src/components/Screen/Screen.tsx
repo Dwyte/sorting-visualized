@@ -1,21 +1,25 @@
-import { Bar, SortingAlgorithm } from "../../types";
-import { Graph } from "../Graph";
+import { useContext } from "react";
+
 import { AlgorithmSelection } from "./AlgorithmSelection";
+import { Graph } from "../Graph";
+
+import { IsPlayingContext } from "../../contexts/IsPlayingContext";
+import { Bar, SortingAlgorithm } from "../../types";
 import { Container } from "./style";
 
 interface Props {
-  isPlaying: boolean;
   graphData: Bar[];
   sortingAlgorithm: SortingAlgorithm;
   onSelectAlgorithm: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 export const Screen: React.FC<Props> = ({
-  isPlaying,
   graphData,
   sortingAlgorithm,
   onSelectAlgorithm,
 }) => {
+  const isPlaying: boolean = useContext(IsPlayingContext);
+
   return (
     <Container>
       <AlgorithmSelection

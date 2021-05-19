@@ -8,6 +8,7 @@ import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
 import { generateSoringSteps } from "./sortingAlgorithms";
 import { playSpeedConfigs } from "./constants";
 import { shuffleArray } from "./utilities";
+import { IsPlayingContext } from "./contexts/IsPlayingContext";
 
 const Container = styled.div`
   flex-direction: column;
@@ -121,28 +122,28 @@ const App = () => {
   };
 
   return (
-    <Container>
-      <Screen
-        isPlaying={Boolean(playTimeout)}
-        sortingAlgorithm={sortingAlgorithm}
-        onSelectAlgorithm={handleSelectAlgorithm}
-        graphData={graphDataSteps[graphDataStep]}
-      />
+    <IsPlayingContext.Provider value={Boolean(playTimeout)}>
+      <Container>
+        <Screen
+          sortingAlgorithm={sortingAlgorithm}
+          onSelectAlgorithm={handleSelectAlgorithm}
+          graphData={graphDataSteps[graphDataStep]}
+        />
 
-      <PlayerControl
-        playSpeedConfig={playSpeedConfig}
-        isPlaying={Boolean(playTimeout)}
-        graphDataStep={graphDataStep}
-        graphDataStepsLength={graphDataSteps.length}
-        onPrevious={handlePrevious}
-        onPause={handlePause}
-        onPlay={handlePlay}
-        onNext={handleNext}
-        onRandom={handleRandom}
-        onSliderChange={handleSliderChange}
-        onSelectPlaySpeed={handleSelectPlaySpeed}
-      />
-    </Container>
+        <PlayerControl
+          playSpeedConfig={playSpeedConfig}
+          graphDataStep={graphDataStep}
+          graphDataStepsLength={graphDataSteps.length}
+          onPrevious={handlePrevious}
+          onPause={handlePause}
+          onPlay={handlePlay}
+          onNext={handleNext}
+          onRandom={handleRandom}
+          onSliderChange={handleSliderChange}
+          onSelectPlaySpeed={handleSelectPlaySpeed}
+        />
+      </Container>
+    </IsPlayingContext.Provider>
   );
 };
 

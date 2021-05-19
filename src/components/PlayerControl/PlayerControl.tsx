@@ -1,9 +1,11 @@
+import { useContext } from "react";
+
+import { IsPlayingContext } from "../../contexts/IsPlayingContext";
 import { playSpeedConfigs } from "../../constants";
 import { PlaySpeedConfig } from "../../types";
 import { Slider, Container } from "./styles";
 
 interface Props {
-  isPlaying: boolean;
   graphDataStep: number;
   graphDataStepsLength: number;
   playSpeedConfig: PlaySpeedConfig;
@@ -17,7 +19,6 @@ interface Props {
 }
 
 export const PlayerControl: React.FC<Props> = ({
-  isPlaying,
   graphDataStep,
   graphDataStepsLength,
   playSpeedConfig,
@@ -29,6 +30,8 @@ export const PlayerControl: React.FC<Props> = ({
   onSliderChange,
   onSelectPlaySpeed,
 }) => {
+  const isPlaying: boolean = useContext(IsPlayingContext);
+
   return (
     <Container>
       <button onClick={onRandom} disabled={isPlaying}>
