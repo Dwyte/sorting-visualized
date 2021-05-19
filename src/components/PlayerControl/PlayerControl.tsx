@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
-import { playSpeedConfigs } from "../../constants";
+import { playSpeedConfigs, visualizerCountConfigs } from "../../constants";
 import { PlaySpeedConfig } from "../../types";
 import { Slider, Container } from "./styles";
 
@@ -9,31 +9,47 @@ interface Props {
   currentStep: number;
   totalSteps: number;
   playSpeedConfig: PlaySpeedConfig;
+  visualizerCount: number;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
   onPlay: React.MouseEventHandler<HTMLButtonElement>;
   onPause: React.MouseEventHandler<HTMLButtonElement>;
   onNext: React.MouseEventHandler<HTMLButtonElement>;
-  onSliderChange: React.ChangeEventHandler<HTMLInputElement>;
-  onSelectPlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeSlider: React.ChangeEventHandler<HTMLInputElement>;
+  onChangePlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeVisualizerCount: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 export const PlayerControl: React.FC<Props> = ({
   currentStep,
   totalSteps,
   playSpeedConfig,
+  visualizerCount,
   onRandom,
   onPrevious,
   onPlay,
   onPause,
   onNext,
-  onSliderChange,
-  onSelectPlaySpeed,
+  onChangeSlider,
+  onChangePlaySpeed,
+  onChangeVisualizerCount,
 }) => {
   const isPlaying: boolean = useContext(IsPlayingContext);
 
   return (
     <Container>
+      <select
+        value={visualizerCount}
+        onChange={onChangeVisualizerCount}
+        disabled={isPlaying}
+      >
+        {visualizerCountConfigs.map((visualizerCount: number) => (
+          <option key={visualizerCount} value={visualizerCount}>
+            {visualizerCount}
+          </option>
+        ))}
+      </select>
+
       <button onClick={onRandom} disabled={isPlaying}>
         Random
       </button>
@@ -48,7 +64,7 @@ export const PlayerControl: React.FC<Props> = ({
 
       <select
         value={playSpeedConfig.playSpeed}
-        onChange={onSelectPlaySpeed}
+        onChange={onChangePlaySpeed}
         disabled={isPlaying}
       >
         {playSpeedConfigs.map((playSpeedConfigs: PlaySpeedConfig) => (
@@ -70,7 +86,7 @@ export const PlayerControl: React.FC<Props> = ({
         min={0}
         max={totalSteps - 1}
         value={currentStep}
-        onChange={onSliderChange}
+        onChange={onChangeSlider}
       />
     </Container>
   );

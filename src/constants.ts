@@ -36,3 +36,5 @@ export const playSpeedConfigs: PlaySpeedConfig[] = [
     playStepIntervalMS: 5,
   },
 ];
+
+export const visualizerCountConfigs = [1, 2, 4];

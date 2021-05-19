@@ -12,3 +12,5 @@ export interface PlaySpeedConfig {
 }
 
 export type SortingAlgorithm = "Bubble" | "Selection" | "Insertion" | "Merge";
+
+export type VisualizerCount = 1 | 2 | 4;

@@ -4,9 +4,18 @@ import styled from "styled-components";
 import { PlayerControl } from "./components/PlayerControl";
 import { Visualizer } from "./components/Visualizer";
 
-import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
+import {
+  Bar,
+  PlaySpeedConfig,
+  SortingAlgorithm,
+  VisualizerCount,
+} from "./types";
 import { generateSoringSteps } from "./sortingAlgorithms";
-import { playSpeedConfigs, sortingAlgorithms } from "./constants";
+import {
+  playSpeedConfigs,
+  sortingAlgorithms,
+  visualizerCountConfigs,
+} from "./constants";
 import { generateRandomGraphData } from "./utilities";
 import { IsPlayingContext } from "./contexts/IsPlayingContext";
 
@@ -73,6 +82,8 @@ const App = () => {
     return maxLength;
   }, [allSortingSteps, activeAlgorithms]);
 
+  const [visualizerCount, setVisualizerCount] = useState<VisualizerCount>(1);
+
   useEffect(() => {
     const newAllSortingSteps: AllSortingSteps = {};
     sortingAlgorithms.forEach((algorithm: SortingAlgorithm) => {
@@ -138,11 +149,11 @@ const App = () => {
     }
   }, [currentStep, totalSteps]);
 
-  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentSortStep(parseInt(event.target.value));
   };
 
-  const handleSelectPlaySpeed = (
+  const handleChangePlaySpeed = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const newPlaySpeedConfig = playSpeedConfigs.find(
@@ -151,6 +162,18 @@ const App = () => {
 
     if (newPlaySpeedConfig) {
       setPlaySpeedConfig(newPlaySpeedConfig);
+    }
+  };
+
+  const handleChangeVisualizerCount = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const newVisualizerCount: number | undefined = visualizerCountConfigs.find(
+      (config) => config === parseInt(event.target.value)
+    );
+
+    if (newVisualizerCount) {
+      setVisualizerCount(newVisualizerCount as VisualizerCount);
     }
   };
 
@@ -175,13 +198,15 @@ const App = () => {
           currentStep={currentStep}
           playSpeedConfig={playSpeedConfig}
           totalSteps={totalSteps}
+          visualizerCount={visualizerCount}
           onPrevious={handlePrevious}
           onPause={handlePause}
           onPlay={handlePlay}
           onNext={handleNext}
           onRandom={handleRandom}
-          onSliderChange={handleSliderChange}
-          onSelectPlaySpeed={handleSelectPlaySpeed}
+          onChangeSlider={handleChangeSlider}
+          onChangePlaySpeed={handleChangePlaySpeed}
+          onChangeVisualizerCount={handleChangeVisualizerCount}
         />
       </Container>
     </IsPlayingContext.Provider>
