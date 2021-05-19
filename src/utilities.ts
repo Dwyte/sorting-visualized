@@ -12,3 +12,12 @@ export const shuffleArray = (arrayToShuffle: any[]): any[] => {
 
   return shuffledArray;
 };
+
+export const generateRandomGraphData = () =>
+  shuffleArray(
+    Array(100)
+      .fill(0)
+      .map((_, index) => ({
+        value: index + 1,
+      }))
+  );

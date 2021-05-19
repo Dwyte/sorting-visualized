@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import styled from "styled-components";
 
 import { PlayerControl } from "./components/PlayerControl";
@@ -7,7 +7,7 @@ import { Visualizer } from "./components/Visualizer";
 import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
 import { generateSoringSteps } from "./sortingAlgorithms";
 import { playSpeedConfigs, sortingAlgorithms } from "./constants";
-import { shuffleArray } from "./utilities";
+import { generateRandomGraphData } from "./utilities";
 import { IsPlayingContext } from "./contexts/IsPlayingContext";
 
 const Container = styled.div`
@@ -17,17 +17,24 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const generateRandomGraphData = () =>
-  shuffleArray(
-    Array(100)
-      .fill(0)
-      .map((_, index) => ({
-        value: index + 1,
-      }))
-  );
-
 type AllSortingSteps = {
   [key in SortingAlgorithm]?: Bar[][];
+};
+
+interface ReducerActions {
+  type: "change-algorithm";
+  payload: any;
+}
+
+const reducer = (state: SortingAlgorithm[], action: ReducerActions) => {
+  switch (action.type) {
+    case "change-algorithm":
+      const stateCopy = [...state];
+      stateCopy[action.payload.index] = action.payload.algorithm;
+      return stateCopy;
+    default:
+      return state;
+  }
 };
 
 const App = () => {
@@ -41,9 +48,8 @@ const App = () => {
   ] = useState<AllSortingSteps | null>(null);
 
   const [currentStep, setCurrentSortStep] = useState<number>(0);
-  const [sortingAlgorithm, setSortingAlgorithm] = useState<SortingAlgorithm>(
-    "Merge"
-  );
+
+  const [activeAlgorithms, dispatch] = useReducer(reducer, ["Merge"]);
 
   const [playSpeedConfig, setPlaySpeedConfig] = useState<PlaySpeedConfig>(
     playSpeedConfigs[0]
@@ -51,7 +57,7 @@ const App = () => {
 
   const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
 
-  const sortingSteps = allSortingSteps?.[sortingAlgorithm] || [dataToSort];
+  const sortingSteps = allSortingSteps?.[activeAlgorithms[0]] || [dataToSort];
 
   useEffect(() => {
     const newAllSortingSteps: AllSortingSteps = {};
@@ -64,10 +70,6 @@ const App = () => {
 
     setAllSortingSteps(newAllSortingSteps);
   }, [dataToSort]);
-
-  useEffect(() => {
-    setCurrentSortStep(0);
-  }, [dataToSort, sortingAlgorithm]);
 
   const moveGraphDataStep = (stepSize: number) => {
     setCurrentSortStep((currentGraphDataStep) => {
@@ -127,12 +129,6 @@ const App = () => {
     setCurrentSortStep(parseInt(event.target.value));
   };
 
-  const handleSelectAlgorithm = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setSortingAlgorithm(event.target.value as SortingAlgorithm);
-  };
-
   const handleSelectPlaySpeed = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -148,12 +144,19 @@ const App = () => {
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
-        <Visualizer
-          sortingAlgorithm={sortingAlgorithm}
-          onSelectAlgorithm={handleSelectAlgorithm}
-          sortingSteps={sortingSteps}
-          currentStep={currentStep}
-        />
+        {activeAlgorithms.map((activeAlgorithm, index: number) => (
+          <Visualizer
+            sortingAlgorithm={activeAlgorithm}
+            onSelectAlgorithm={(event: React.ChangeEvent<HTMLSelectElement>) =>
+              dispatch({
+                type: "change-algorithm",
+                payload: { index, algorithm: event.target.value },
+              })
+            }
+            sortingSteps={sortingSteps}
+            currentStep={currentStep}
+          />
+        ))}
 
         <PlayerControl
           currentStep={currentStep}
