@@ -6,7 +6,7 @@ import { Visualizer } from "./components/Visualizer";
 
 import { Bar, PlaySpeedConfig, SortingAlgorithm } from "./types";
 import { generateSoringSteps } from "./sortingAlgorithms";
-import { playSpeedConfigs } from "./constants";
+import { playSpeedConfigs, sortingAlgorithms } from "./constants";
 import { shuffleArray } from "./utilities";
 import { IsPlayingContext } from "./contexts/IsPlayingContext";
 
@@ -26,9 +26,17 @@ const generateRandomGraphData = () =>
       }))
   );
 
+type AllSortingSteps = {
+  [key in SortingAlgorithm]?: Bar[][];
+};
+
 const App = () => {
   const [graphData, setGraphData] = useState<Bar[]>(generateRandomGraphData());
-  const [graphDataSteps, setGraphDataSteps] = useState<Bar[][]>([graphData]);
+  const [
+    allSortingSteps,
+    setAllSortingSteps,
+  ] = useState<AllSortingSteps | null>(null);
+
   const [graphDataStep, setGraphDataStep] = useState<number>(0);
   const [sortingAlgorithm, setSortingAlgorithm] = useState<SortingAlgorithm>(
     "Merge"
@@ -40,8 +48,18 @@ const App = () => {
 
   const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
 
+  const graphDataSteps = allSortingSteps?.[sortingAlgorithm] || [graphData];
+
   useEffect(() => {
-    setGraphDataSteps(generateSoringSteps(graphData, sortingAlgorithm));
+    const newAllSortingSteps: AllSortingSteps = {};
+    sortingAlgorithms.forEach((algorithm: SortingAlgorithm) => {
+      newAllSortingSteps[algorithm] = generateSoringSteps(graphData, algorithm);
+    });
+
+    setAllSortingSteps(newAllSortingSteps);
+  }, [graphData]);
+
+  useEffect(() => {
     setGraphDataStep(0);
   }, [graphData, sortingAlgorithm]);
 
@@ -131,9 +149,9 @@ const App = () => {
         />
 
         <PlayerControl
+          currentStep={graphDataStep}
           playSpeedConfig={playSpeedConfig}
-          graphDataStep={graphDataStep}
-          graphDataStepsLength={graphDataSteps.length}
+          totalSteps={graphDataSteps.length}
           onPrevious={handlePrevious}
           onPause={handlePause}
           onPlay={handlePlay}

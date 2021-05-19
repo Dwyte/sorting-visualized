@@ -6,8 +6,8 @@ import { PlaySpeedConfig } from "../../types";
 import { Slider, Container } from "./styles";
 
 interface Props {
-  graphDataStep: number;
-  graphDataStepsLength: number;
+  currentStep: number;
+  totalSteps: number;
   playSpeedConfig: PlaySpeedConfig;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
@@ -19,8 +19,8 @@ interface Props {
 }
 
 export const PlayerControl: React.FC<Props> = ({
-  graphDataStep,
-  graphDataStepsLength,
+  currentStep,
+  totalSteps,
   playSpeedConfig,
   onRandom,
   onPrevious,
@@ -62,14 +62,14 @@ export const PlayerControl: React.FC<Props> = ({
       </select>
 
       <button style={{ width: "50px" }} disabled>
-        {graphDataStep}
+        {currentStep}
       </button>
 
       <Slider
         type="range"
         min={0}
-        max={graphDataStepsLength - 1}
-        value={graphDataStep}
+        max={totalSteps - 1}
+        value={currentStep}
         onChange={onSliderChange}
       />
     </Container>
