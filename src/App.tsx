@@ -42,36 +42,6 @@ type AllSortingSteps = {
   [key in SortingAlgorithm]?: Bar[][];
 };
 
-interface ReducerActions {
-  type: "change-algorithm" | "change-visualizer-count";
-  payload: any;
-}
-
-const reducer = (state: SortingAlgorithm[], action: ReducerActions) => {
-  switch (action.type) {
-    case "change-algorithm":
-      const stateCopy = [...state];
-      stateCopy[action.payload.index] = action.payload.algorithm;
-      return stateCopy;
-    case "change-visualizer-count":
-      if (action.payload === 1) {
-        return [state[0]];
-      } else if (action.payload === 2) {
-        return [state[0], state[1] || "Merge"];
-      } else if (action.payload === 4) {
-        return [
-          state[0],
-          state[1] || "Merge",
-          state[2] || "Merge",
-          state[4] || "Merge",
-        ];
-      }
-      return state;
-    default:
-      return state;
-  }
-};
-
 const App = () => {
   const [dataToSort, setDataToSort] = useState<Bar[]>(
     generateRandomGraphData()
@@ -84,7 +54,9 @@ const App = () => {
 
   const [currentStep, setCurrentSortStep] = useState<number>(0);
 
-  const [activeAlgorithms, dispatch] = useReducer(reducer, ["Merge"]);
+  const [activeAlgorithms, setActiveAlgorithms] = useState<SortingAlgorithm[]>([
+    "Merge",
+  ]);
 
   const [playSpeedConfig, setPlaySpeedConfig] = useState<PlaySpeedConfig>(
     playSpeedConfigs[0]
@@ -117,6 +89,41 @@ const App = () => {
     setAllSortingSteps(newAllSortingSteps);
     setCurrentSortStep(0);
   }, [dataToSort]);
+
+  useEffect(() => {
+    if (currentStep === totalSteps - 1) {
+      setPlayTimeout((currentPlayTimeout) => {
+        if (currentPlayTimeout) {
+          clearTimeout(currentPlayTimeout);
+          return null;
+        }
+
+        return currentPlayTimeout;
+      });
+    }
+  }, [currentStep, totalSteps]);
+
+  const changeVisualizerCount = (newCount: number) => {
+    setActiveAlgorithms((currentActiveAlgorithms) => {
+      if (newCount === 1) {
+        return [currentActiveAlgorithms[0]];
+      } else if (newCount === 2) {
+        return [
+          currentActiveAlgorithms[0],
+          currentActiveAlgorithms[1] || "Merge",
+        ];
+      } else if (newCount === 4) {
+        return [
+          currentActiveAlgorithms[0],
+          currentActiveAlgorithms[1] || "Merge",
+          currentActiveAlgorithms[2] || "Merge",
+          currentActiveAlgorithms[4] || "Merge",
+        ];
+      }
+
+      return currentActiveAlgorithms;
+    });
+  };
 
   const moveGraphDataStep = (stepSize: number) => {
     setCurrentSortStep((currentGraphDataStep) => {
@@ -158,19 +165,6 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    if (currentStep === totalSteps - 1) {
-      setPlayTimeout((currentPlayTimeout) => {
-        if (currentPlayTimeout) {
-          clearTimeout(currentPlayTimeout);
-          return null;
-        }
-
-        return currentPlayTimeout;
-      });
-    }
-  }, [currentStep, totalSteps]);
-
   const handleChangeSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentSortStep(parseInt(event.target.value));
   };
@@ -187,6 +181,16 @@ const App = () => {
     }
   };
 
+  const handleChangeAlgorithm = (visualizerIndex: number) => (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setActiveAlgorithms((currentActiveAlgorithms) => {
+      const stateCopy = [...currentActiveAlgorithms];
+      stateCopy[visualizerIndex] = event.target.value as SortingAlgorithm;
+      return stateCopy;
+    });
+  };
+
   const handleChangeVisualizerCount = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -195,10 +199,7 @@ const App = () => {
     );
 
     if (newVisualizerCount) {
-      dispatch({
-        type: "change-visualizer-count",
-        payload: newVisualizerCount,
-      });
+      changeVisualizerCount(newVisualizerCount);
     }
   };
 
@@ -211,14 +212,7 @@ const App = () => {
           {activeAlgorithms.map((activeAlgorithm, index: number) => (
             <Visualizer
               sortingAlgorithm={activeAlgorithm}
-              onSelectAlgorithm={(
-                event: React.ChangeEvent<HTMLSelectElement>
-              ) =>
-                dispatch({
-                  type: "change-algorithm",
-                  payload: { index, algorithm: event.target.value },
-                })
-              }
+              onSelectAlgorithm={handleChangeAlgorithm(index)}
               sortingSteps={allSortingSteps?.[activeAlgorithm] || [dataToSort]}
               currentStep={currentStep}
             />
