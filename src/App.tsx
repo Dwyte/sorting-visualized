@@ -1,48 +1,28 @@
-import React, { useEffect, useMemo, useReducer, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useMemo, useState } from "react";
 
+import { IsPlayingContext } from "./contexts/IsPlayingContext";
 import { PlayerControl } from "./components/PlayerControl";
 import { Visualizer } from "./components/Visualizer";
 
 import {
   Bar,
+  AllSortingSteps,
   PlaySpeedConfig,
   SortingAlgorithm,
   VisualizerCount,
 } from "./types";
-import { generateSoringSteps } from "./sortingAlgorithms";
+
 import {
   playSpeedConfigs,
   sortingAlgorithms,
   visualizerCountConfigs,
 } from "./constants";
+
+import { generateSoringSteps } from "./sortingAlgorithms";
 import { generateRandomGraphData } from "./utilities";
-import { IsPlayingContext } from "./contexts/IsPlayingContext";
+import { Container, VisualizersGrid } from "./styles";
 
-const Container = styled.div`
-  flex-direction: column;
-  padding: 0.5rem;
-  display: flex;
-  height: 100%;
-`;
-
-const VisualizersGrid = styled.div<{ visualizerCount: VisualizerCount }>`
-  grid-gap: 0.25rem;
-  display: grid;
-  height: 100%;
-
-  grid-template-columns: ${({ visualizerCount }) =>
-    visualizerCount >= 2 ? "1fr 1fr" : "1fr"};
-
-  grid-template-rows: ${({ visualizerCount }) =>
-    visualizerCount === 4 ? "1fr 1fr" : "1fr"};
-`;
-
-type AllSortingSteps = {
-  [key in SortingAlgorithm]?: Bar[][];
-};
-
-const App = () => {
+const App: React.FC = () => {
   const [dataToSort, setDataToSort] = useState<Bar[]>(
     generateRandomGraphData()
   );
@@ -78,7 +58,7 @@ const App = () => {
   }, [allSortingSteps, activeAlgorithms]);
 
   useEffect(() => {
-    const newAllSortingSteps: AllSortingSteps = {};
+    const newAllSortingSteps: any = {};
     sortingAlgorithms.forEach((algorithm: SortingAlgorithm) => {
       newAllSortingSteps[algorithm] = generateSoringSteps(
         dataToSort,
@@ -86,7 +66,7 @@ const App = () => {
       );
     });
 
-    setAllSortingSteps(newAllSortingSteps);
+    setAllSortingSteps(newAllSortingSteps as AllSortingSteps);
     setCurrentSortStep(0);
   }, [dataToSort]);
 
