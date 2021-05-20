@@ -1,4 +1,9 @@
-import { PlaySpeed, PlaySpeedConfig, SortingAlgorithm } from "./types";
+import {
+  ArraySizeConfig,
+  PlaySpeed,
+  PlaySpeedConfig,
+  SortingAlgorithm,
+} from "./types";
 
 export const sortingAlgorithms: SortingAlgorithm[] = [
   "Merge",
@@ -43,3 +48,9 @@ export const playSpeedConfigs: PlaySpeedConfig[] = [
 ];
 
 export const visualizerCountConfigs = [1, 2, 4];
+
+export const arraySizeConfigs: ArraySizeConfig[] = [
+  { arraySize: "Small", actualSize: 25 },
+  { arraySize: "Medium", actualSize: 50 },
+  { arraySize: "Large", actualSize: 100 },
+];

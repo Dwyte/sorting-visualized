@@ -10,9 +10,11 @@ import {
   PlaySpeedConfig,
   SortingAlgorithm,
   VisualizerCount,
+  ArraySizeConfig,
 } from "./types";
 
 import {
+  arraySizeConfigs,
   playSpeedConfigs,
   sortingAlgorithms,
   visualizerCountConfigs,
@@ -23,9 +25,7 @@ import { generateRandomGraphData } from "./utilities";
 import { Container, VisualizersGrid } from "./styles";
 
 const App: React.FC = () => {
-  const [dataToSort, setDataToSort] = useState<Bar[]>(
-    generateRandomGraphData()
-  );
+  const [dataToSort, setDataToSort] = useState<Bar[]>([{ value: 100 }]);
 
   const [
     allSortingSteps,
@@ -44,6 +44,10 @@ const App: React.FC = () => {
 
   const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
 
+  const [arraySizeConfig, setArraySizeConfig] = useState<ArraySizeConfig>(
+    arraySizeConfigs[0]
+  );
+
   const totalSteps: number = useMemo(() => {
     let maxLength: number = 1;
     if (allSortingSteps) {
@@ -56,6 +60,10 @@ const App: React.FC = () => {
     }
     return maxLength;
   }, [allSortingSteps, activeAlgorithms]);
+
+  useEffect(() => {
+    setDataToSort(generateRandomGraphData(arraySizeConfig.actualSize));
+  }, [arraySizeConfig]);
 
   useEffect(() => {
     const newAllSortingSteps: any = {};
@@ -116,7 +124,7 @@ const App: React.FC = () => {
   };
 
   const handleRandom = () => {
-    setDataToSort(generateRandomGraphData());
+    setDataToSort(generateRandomGraphData(arraySizeConfig.actualSize));
   };
 
   const handlePrevious = () => {
@@ -183,6 +191,18 @@ const App: React.FC = () => {
     }
   };
 
+  const handleChangeArraySizeConfig = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const newArraySizeConfig = arraySizeConfigs.find(
+      (config) => config.arraySize === event.target.value
+    );
+
+    if (newArraySizeConfig) {
+      setArraySizeConfig(newArraySizeConfig);
+    }
+  };
+
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
@@ -200,6 +220,7 @@ const App: React.FC = () => {
         </VisualizersGrid>
 
         <PlayerControl
+          arraySizeConfig={arraySizeConfig}
           currentStep={currentStep}
           playSpeedConfig={playSpeedConfig}
           totalSteps={totalSteps}
@@ -212,6 +233,7 @@ const App: React.FC = () => {
           onChangeSlider={handleChangeSlider}
           onChangePlaySpeed={handleChangePlaySpeed}
           onChangeVisualizerCount={handleChangeVisualizerCount}
+          onChangeArraySize={handleChangeArraySizeConfig}
         />
       </Container>
     </IsPlayingContext.Provider>

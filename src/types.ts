@@ -20,3 +20,9 @@ export type SortingSteps = Bar[][];
 export type AllSortingSteps = {
   [key in SortingAlgorithm]: SortingSteps;
 };
+
+export type ArraySize = "Small" | "Medium" | "Large";
+export interface ArraySizeConfig {
+  arraySize: ArraySize;
+  actualSize: number;
+}

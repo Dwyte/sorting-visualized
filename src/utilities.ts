@@ -13,11 +13,11 @@ export const shuffleArray = (arrayToShuffle: any[]): any[] => {
   return shuffledArray;
 };
 
-export const generateRandomGraphData = () =>
+export const generateRandomGraphData = (arraySize: number) =>
   shuffleArray(
-    Array(100)
+    Array(arraySize)
       .fill(0)
       .map((_, index) => ({
-        value: index + 1,
+        value: (index + 1) * Math.round(100 / arraySize),
       }))
   );

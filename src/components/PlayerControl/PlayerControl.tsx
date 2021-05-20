@@ -1,8 +1,12 @@
 import { useContext } from "react";
 
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
-import { playSpeedConfigs, visualizerCountConfigs } from "../../constants";
-import { PlaySpeedConfig } from "../../types";
+import {
+  arraySizeConfigs,
+  playSpeedConfigs,
+  visualizerCountConfigs,
+} from "../../constants";
+import { ArraySizeConfig, PlaySpeedConfig } from "../../types";
 import { Slider, Container } from "./styles";
 
 interface Props {
@@ -10,6 +14,7 @@ interface Props {
   totalSteps: number;
   playSpeedConfig: PlaySpeedConfig;
   visualizerCount: number;
+  arraySizeConfig: ArraySizeConfig;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
   onPlay: React.MouseEventHandler<HTMLButtonElement>;
@@ -18,6 +23,7 @@ interface Props {
   onChangeSlider: React.ChangeEventHandler<HTMLInputElement>;
   onChangePlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
   onChangeVisualizerCount: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeArraySize: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 export const PlayerControl: React.FC<Props> = ({
@@ -25,6 +31,7 @@ export const PlayerControl: React.FC<Props> = ({
   totalSteps,
   playSpeedConfig,
   visualizerCount,
+  arraySizeConfig,
   onRandom,
   onPrevious,
   onPlay,
@@ -33,11 +40,23 @@ export const PlayerControl: React.FC<Props> = ({
   onChangeSlider,
   onChangePlaySpeed,
   onChangeVisualizerCount,
+  onChangeArraySize,
 }) => {
   const isPlaying: boolean = useContext(IsPlayingContext);
 
   return (
     <Container>
+      <select
+        value={arraySizeConfig.arraySize}
+        onChange={onChangeArraySize}
+        disabled={isPlaying}
+      >
+        {arraySizeConfigs.map((config: ArraySizeConfig) => (
+          <option key={config.arraySize} value={config.arraySize}>
+            {config.arraySize}
+          </option>
+        ))}
+      </select>
       <select
         value={visualizerCount}
         onChange={onChangeVisualizerCount}
@@ -67,12 +86,9 @@ export const PlayerControl: React.FC<Props> = ({
         onChange={onChangePlaySpeed}
         disabled={isPlaying}
       >
-        {playSpeedConfigs.map((playSpeedConfigs: PlaySpeedConfig) => (
-          <option
-            key={playSpeedConfigs.playSpeed}
-            value={playSpeedConfigs.playSpeed}
-          >
-            {playSpeedConfigs.playSpeed}x
+        {playSpeedConfigs.map((config: PlaySpeedConfig) => (
+          <option key={config.playSpeed} value={config.playSpeed}>
+            {config.playSpeed}x
           </option>
         ))}
       </select>
