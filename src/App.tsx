@@ -11,6 +11,7 @@ import {
   SortingAlgorithm,
   VisualizerCount,
   ArraySizeConfig,
+  ArrayVariation,
 } from "./types";
 
 import {
@@ -27,10 +28,8 @@ import { Container, VisualizersGrid } from "./styles";
 const App: React.FC = () => {
   const [dataToSort, setDataToSort] = useState<Bar[]>([{ value: 100 }]);
 
-  const [
-    allSortingSteps,
-    setAllSortingSteps,
-  ] = useState<AllSortingSteps | null>(null);
+  const [allSortingSteps, setAllSortingSteps] =
+    useState<AllSortingSteps | null>(null);
 
   const [currentStep, setCurrentSortStep] = useState<number>(0);
 
@@ -48,6 +47,9 @@ const App: React.FC = () => {
     arraySizeConfigs[0]
   );
 
+  const [arrayVariation, setArrayVariation] =
+    useState<ArrayVariation>("Unique");
+
   const totalSteps: number = useMemo(() => {
     let maxLength: number = 1;
     if (allSortingSteps) {
@@ -62,8 +64,10 @@ const App: React.FC = () => {
   }, [allSortingSteps, activeAlgorithms]);
 
   useEffect(() => {
-    setDataToSort(generateRandomGraphData(arraySizeConfig.actualSize));
-  }, [arraySizeConfig]);
+    setDataToSort(
+      generateRandomGraphData(arraySizeConfig.actualSize, arrayVariation)
+    );
+  }, [arraySizeConfig, arrayVariation]);
 
   useEffect(() => {
     const newAllSortingSteps: any = {};
@@ -124,7 +128,9 @@ const App: React.FC = () => {
   };
 
   const handleRandom = () => {
-    setDataToSort(generateRandomGraphData(arraySizeConfig.actualSize));
+    setDataToSort(
+      generateRandomGraphData(arraySizeConfig.actualSize, arrayVariation)
+    );
   };
 
   const handlePrevious = () => {
@@ -169,15 +175,15 @@ const App: React.FC = () => {
     }
   };
 
-  const handleChangeAlgorithm = (visualizerIndex: number) => (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setActiveAlgorithms((currentActiveAlgorithms) => {
-      const stateCopy = [...currentActiveAlgorithms];
-      stateCopy[visualizerIndex] = event.target.value as SortingAlgorithm;
-      return stateCopy;
-    });
-  };
+  const handleChangeAlgorithm =
+    (visualizerIndex: number) =>
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setActiveAlgorithms((currentActiveAlgorithms) => {
+        const stateCopy = [...currentActiveAlgorithms];
+        stateCopy[visualizerIndex] = event.target.value as SortingAlgorithm;
+        return stateCopy;
+      });
+    };
 
   const handleChangeVisualizerCount = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -203,6 +209,12 @@ const App: React.FC = () => {
     }
   };
 
+  const handleChangeArrayVariation = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setArrayVariation(event.target.value as ArrayVariation);
+  };
+
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
@@ -224,6 +236,7 @@ const App: React.FC = () => {
           currentStep={currentStep}
           playSpeedConfig={playSpeedConfig}
           totalSteps={totalSteps}
+          arrayVariation={arrayVariation}
           visualizerCount={activeAlgorithms.length as VisualizerCount}
           onPrevious={handlePrevious}
           onPause={handlePause}
@@ -234,6 +247,7 @@ const App: React.FC = () => {
           onChangePlaySpeed={handleChangePlaySpeed}
           onChangeVisualizerCount={handleChangeVisualizerCount}
           onChangeArraySize={handleChangeArraySizeConfig}
+          onChangeArrayVariation={handleChangeArrayVariation}
         />
       </Container>
     </IsPlayingContext.Provider>

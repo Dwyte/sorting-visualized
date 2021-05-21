@@ -1,5 +1,6 @@
 import {
   ArraySizeConfig,
+  ArrayVariation,
   PlaySpeed,
   PlaySpeedConfig,
   SortingAlgorithm,
@@ -54,3 +55,5 @@ export const arraySizeConfigs: ArraySizeConfig[] = [
   { arraySize: "Medium", actualSize: 50 },
   { arraySize: "Large", actualSize: 100 },
 ];
+
+export const arrayVariations: ArrayVariation[] = ["Random", "Unique"];

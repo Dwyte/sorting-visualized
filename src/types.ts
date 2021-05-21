@@ -26,3 +26,5 @@ export interface ArraySizeConfig {
   arraySize: ArraySize;
   actualSize: number;
 }
+
+export type ArrayVariation = "Unique" | "Random";

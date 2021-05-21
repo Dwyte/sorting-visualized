@@ -3,10 +3,11 @@ import { useContext } from "react";
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
 import {
   arraySizeConfigs,
+  arrayVariations,
   playSpeedConfigs,
   visualizerCountConfigs,
 } from "../../constants";
-import { ArraySizeConfig, PlaySpeedConfig } from "../../types";
+import { ArraySizeConfig, ArrayVariation, PlaySpeedConfig } from "../../types";
 import { Slider, Container } from "./styles";
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
   playSpeedConfig: PlaySpeedConfig;
   visualizerCount: number;
   arraySizeConfig: ArraySizeConfig;
+  arrayVariation: ArrayVariation;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onPrevious: React.MouseEventHandler<HTMLButtonElement>;
   onPlay: React.MouseEventHandler<HTMLButtonElement>;
@@ -24,6 +26,7 @@ interface Props {
   onChangePlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
   onChangeVisualizerCount: React.ChangeEventHandler<HTMLSelectElement>;
   onChangeArraySize: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeArrayVariation: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 export const PlayerControl: React.FC<Props> = ({
@@ -32,6 +35,7 @@ export const PlayerControl: React.FC<Props> = ({
   playSpeedConfig,
   visualizerCount,
   arraySizeConfig,
+  arrayVariation,
   onRandom,
   onPrevious,
   onPlay,
@@ -41,11 +45,23 @@ export const PlayerControl: React.FC<Props> = ({
   onChangePlaySpeed,
   onChangeVisualizerCount,
   onChangeArraySize,
+  onChangeArrayVariation,
 }) => {
   const isPlaying: boolean = useContext(IsPlayingContext);
 
   return (
     <Container>
+      <select
+        value={arrayVariation}
+        onChange={onChangeArrayVariation}
+        disabled={isPlaying}
+      >
+        {arrayVariations.map((varitiation: ArrayVariation) => (
+          <option key={varitiation} value={varitiation}>
+            {varitiation}
+          </option>
+        ))}
+      </select>
       <select
         value={arraySizeConfig.arraySize}
         onChange={onChangeArraySize}
