@@ -13,7 +13,7 @@ export const sortingAlgorithms: SortingAlgorithm[] = [
   "Selection",
 ];
 
-export const playSpeeds: PlaySpeed[] = [1, 2, 3, 4, 5, 10];
+export const playSpeeds: PlaySpeed[] = [1, 2, 3, 4, 5];
 
 export const playSpeedConfigs: PlaySpeedConfig[] = [
   {
@@ -29,31 +29,26 @@ export const playSpeedConfigs: PlaySpeedConfig[] = [
   {
     playSpeed: 3,
     playStepSize: 1,
-    playStepIntervalMS: 60,
+    playStepIntervalMS: 50,
   },
   {
     playSpeed: 4,
     playStepSize: 2,
-    playStepIntervalMS: 24,
+    playStepIntervalMS: 25,
   },
   {
     playSpeed: 5,
-    playStepSize: 5,
-    playStepIntervalMS: 5,
-  },
-  {
-    playSpeed: 10,
-    playStepSize: 25,
-    playStepIntervalMS: 1,
+    playStepSize: 3,
+    playStepIntervalMS: 10,
   },
 ];
 
 export const visualizerCountConfigs = [1, 2, 4];
 
 export const arraySizeConfigs: ArraySizeConfig[] = [
-  { arraySize: "Small", actualSize: 25 },
-  { arraySize: "Medium", actualSize: 50 },
-  { arraySize: "Large", actualSize: 100 },
+  { arraySize: "Small", actualSize: 10 },
+  { arraySize: "Medium", actualSize: 25 },
+  { arraySize: "Large", actualSize: 50 },
 ];
 
 export const arrayVariations: ArrayVariation[] = ["Random", "Unique"];
