@@ -22,6 +22,7 @@ interface Props {
   onPlay: React.MouseEventHandler<HTMLButtonElement>;
   onPause: React.MouseEventHandler<HTMLButtonElement>;
   onNext: React.MouseEventHandler<HTMLButtonElement>;
+  onReset: React.MouseEventHandler<HTMLButtonElement>;
   onChangeSlider: React.ChangeEventHandler<HTMLInputElement>;
   onChangePlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
   onChangeVisualizerCount: React.ChangeEventHandler<HTMLSelectElement>;
@@ -41,6 +42,7 @@ export const PlayerControl: React.FC<Props> = ({
   onPlay,
   onPause,
   onNext,
+  onReset,
   onChangeSlider,
   onChangePlaySpeed,
   onChangeVisualizerCount,
@@ -88,6 +90,8 @@ export const PlayerControl: React.FC<Props> = ({
       <button onClick={onRandom} disabled={isPlaying}>
         Random
       </button>
+      <button onClick={onReset}>Reset</button>
+
       <button onClick={onPrevious} disabled={isPlaying}>
         {"<"}
       </button>
@@ -108,10 +112,6 @@ export const PlayerControl: React.FC<Props> = ({
           </option>
         ))}
       </select>
-
-      <button style={{ width: "50px" }} disabled>
-        {currentStep}
-      </button>
 
       <Slider
         type="range"

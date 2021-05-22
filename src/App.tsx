@@ -159,6 +159,11 @@ const App: React.FC = () => {
     }
   };
 
+  const handleReset = () => {
+    handlePause();
+    setCurrentSortStep(0);
+  };
+
   const handleChangeSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentSortStep(parseInt(event.target.value));
   };
@@ -242,6 +247,7 @@ const App: React.FC = () => {
           onPause={handlePause}
           onPlay={handlePlay}
           onNext={handleNext}
+          onReset={handleReset}
           onRandom={handleRandom}
           onChangeSlider={handleChangeSlider}
           onChangePlaySpeed={handleChangePlaySpeed}
