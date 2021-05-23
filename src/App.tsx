@@ -224,7 +224,19 @@ const App: React.FC = () => {
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
-        <Header />
+        <Header
+          arraySizeConfig={arraySizeConfig}
+          arrayVariation={arrayVariation}
+          visualizerCount={activeAlgorithms.length as VisualizerCount}
+          playSpeedConfig={playSpeedConfig}
+          onReset={handleReset}
+          onRandom={handleRandom}
+          onChangePlaySpeed={handleChangePlaySpeed}
+          onChangeVisualizerCount={handleChangeVisualizerCount}
+          onChangeArraySize={handleChangeArraySizeConfig}
+          onChangeArrayVariation={handleChangeArrayVariation}
+        />
+
         <Main>
           <VisualizersGrid
             visualizerCount={activeAlgorithms.length as VisualizerCount}
@@ -241,23 +253,13 @@ const App: React.FC = () => {
             ))}
           </VisualizersGrid>
           <PlayerControl
-            arraySizeConfig={arraySizeConfig}
             currentStep={currentStep}
-            playSpeedConfig={playSpeedConfig}
             totalSteps={totalSteps}
-            arrayVariation={arrayVariation}
-            visualizerCount={activeAlgorithms.length as VisualizerCount}
             onPrevious={handlePrevious}
             onPause={handlePause}
             onPlay={handlePlay}
             onNext={handleNext}
-            onReset={handleReset}
-            onRandom={handleRandom}
             onChangeSlider={handleChangeSlider}
-            onChangePlaySpeed={handleChangePlaySpeed}
-            onChangeVisualizerCount={handleChangeVisualizerCount}
-            onChangeArraySize={handleChangeArraySizeConfig}
-            onChangeArrayVariation={handleChangeArrayVariation}
           />
         </Main>
       </Container>
