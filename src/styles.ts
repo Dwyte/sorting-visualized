@@ -2,21 +2,22 @@ import styled from "styled-components";
 import { VisualizerCount } from "./types";
 
 export const Container = styled.div`
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 3fr 8fr;
   padding: 4rem 7rem;
   display: grid;
+  gap: 8px;
   height: 100%;
 `;
 
 export const Main = styled.main`
   flex-direction: column;
   display: flex;
-  gap: 0.25rem;
+  gap: 4px;
   height: 100%;
 `;
 
 export const VisualizersGrid = styled.div<{ visualizerCount: VisualizerCount }>`
-  grid-gap: 0.25rem;
+  grid-gap: 4px;
   display: grid;
   height: 100%;
 

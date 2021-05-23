@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;0,900;1,900&family=Roboto+Mono:wght@400;700&display=swap");
 * {
   box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
 }
 
 html,
@@ -11,7 +13,6 @@ body,
 
 body {
   margin: 0;
-  font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #040404;

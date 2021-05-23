@@ -7,6 +7,7 @@ import {
 } from "../../constants";
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
 import { ArrayVariation, ArraySizeConfig, PlaySpeedConfig } from "../../types";
+import { SubtitleH2, TitleH1 } from "./style";
 
 interface Props {
   visualizerCount: number;
@@ -37,7 +38,8 @@ export const Header: React.FC<Props> = ({
 
   return (
     <header>
-      <h1>Sorting Visualizer</h1>
+      <TitleH1>Sorting, Visualized.</TitleH1>
+      <SubtitleH2>Developed by Dwyte</SubtitleH2>
 
       <select
         value={arrayVariation}

@@ -27,7 +27,7 @@ export const AlgorithmSelect = styled.div`
 export const AlgorithmOption = styled.button<{ isActive: boolean }>`
   background-color: ${({ isActive }) => (isActive ? "#222" : "#111")};
   width: ${({ isActive }) => (isActive ? "108px" : "initial")};
-  padding: 8px 20px;
+  padding: 8px 10px;
   border-radius: 0;
   cursor: pointer;
   color: white;
