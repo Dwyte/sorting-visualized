@@ -5,11 +5,11 @@ import { Graph } from "../Graph";
 
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
 import { Bar, SortingAlgorithm } from "../../types";
-import { Container } from "./style";
+import { Container, GraphContainer } from "./style";
 
 interface Props {
   sortingAlgorithm: SortingAlgorithm;
-  onSelectAlgorithm: React.ChangeEventHandler<HTMLSelectElement>;
+  onSelectAlgorithm: (sortingAlgorithm: SortingAlgorithm) => void;
   sortingSteps: Bar[][];
   currentStep: number;
 }
@@ -30,9 +30,11 @@ export const Visualizer: React.FC<Props> = ({
         disabled={isPlaying}
       />
 
-      <Graph
-        data={sortingSteps[Math.min(currentStep, sortingSteps.length - 1)]}
-      />
+      <GraphContainer>
+        <Graph
+          data={sortingSteps[Math.min(currentStep, sortingSteps.length - 1)]}
+        />
+      </GraphContainer>
     </Container>
   );
 };

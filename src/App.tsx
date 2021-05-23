@@ -182,11 +182,10 @@ const App: React.FC = () => {
   };
 
   const handleChangeAlgorithm =
-    (visualizerIndex: number) =>
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
+    (visualizerIndex: number) => (sortingAlgorithm: SortingAlgorithm) => {
       setActiveAlgorithms((currentActiveAlgorithms) => {
         const stateCopy = [...currentActiveAlgorithms];
-        stateCopy[visualizerIndex] = event.target.value as SortingAlgorithm;
+        stateCopy[visualizerIndex] = sortingAlgorithm;
         return stateCopy;
       });
     };
