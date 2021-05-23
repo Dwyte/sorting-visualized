@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
-import { Slider, Container } from "./styles";
+import { StepProgress, Container } from "./styles";
 
 interface Props {
   currentStep: number;
@@ -35,7 +35,7 @@ export const PlayerControl: React.FC<Props> = ({
         {">"}
       </button>
 
-      <Slider
+      <StepProgress
         type="range"
         min={0}
         max={totalSteps - 1}
