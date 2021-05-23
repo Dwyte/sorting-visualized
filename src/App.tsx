@@ -23,7 +23,8 @@ import {
 
 import { generateSoringSteps } from "./sortingAlgorithms";
 import { generateRandomGraphData } from "./utilities";
-import { Container, VisualizersGrid } from "./styles";
+import { Container, Main, VisualizersGrid } from "./styles";
+import { Header } from "./components/Header/Header";
 
 const App: React.FC = () => {
   const [dataToSort, setDataToSort] = useState<Bar[]>([{ value: 100 }]);
@@ -223,38 +224,42 @@ const App: React.FC = () => {
   return (
     <IsPlayingContext.Provider value={Boolean(playTimeout)}>
       <Container>
-        <VisualizersGrid
-          visualizerCount={activeAlgorithms.length as VisualizerCount}
-        >
-          {activeAlgorithms.map((activeAlgorithm, index: number) => (
-            <Visualizer
-              sortingAlgorithm={activeAlgorithm}
-              onSelectAlgorithm={handleChangeAlgorithm(index)}
-              sortingSteps={allSortingSteps?.[activeAlgorithm] || [dataToSort]}
-              currentStep={currentStep}
-            />
-          ))}
-        </VisualizersGrid>
-
-        <PlayerControl
-          arraySizeConfig={arraySizeConfig}
-          currentStep={currentStep}
-          playSpeedConfig={playSpeedConfig}
-          totalSteps={totalSteps}
-          arrayVariation={arrayVariation}
-          visualizerCount={activeAlgorithms.length as VisualizerCount}
-          onPrevious={handlePrevious}
-          onPause={handlePause}
-          onPlay={handlePlay}
-          onNext={handleNext}
-          onReset={handleReset}
-          onRandom={handleRandom}
-          onChangeSlider={handleChangeSlider}
-          onChangePlaySpeed={handleChangePlaySpeed}
-          onChangeVisualizerCount={handleChangeVisualizerCount}
-          onChangeArraySize={handleChangeArraySizeConfig}
-          onChangeArrayVariation={handleChangeArrayVariation}
-        />
+        <Header />
+        <Main>
+          <VisualizersGrid
+            visualizerCount={activeAlgorithms.length as VisualizerCount}
+          >
+            {activeAlgorithms.map((activeAlgorithm, index: number) => (
+              <Visualizer
+                sortingAlgorithm={activeAlgorithm}
+                onSelectAlgorithm={handleChangeAlgorithm(index)}
+                sortingSteps={
+                  allSortingSteps?.[activeAlgorithm] || [dataToSort]
+                }
+                currentStep={currentStep}
+              />
+            ))}
+          </VisualizersGrid>
+          <PlayerControl
+            arraySizeConfig={arraySizeConfig}
+            currentStep={currentStep}
+            playSpeedConfig={playSpeedConfig}
+            totalSteps={totalSteps}
+            arrayVariation={arrayVariation}
+            visualizerCount={activeAlgorithms.length as VisualizerCount}
+            onPrevious={handlePrevious}
+            onPause={handlePause}
+            onPlay={handlePlay}
+            onNext={handleNext}
+            onReset={handleReset}
+            onRandom={handleRandom}
+            onChangeSlider={handleChangeSlider}
+            onChangePlaySpeed={handleChangePlaySpeed}
+            onChangeVisualizerCount={handleChangeVisualizerCount}
+            onChangeArraySize={handleChangeArraySizeConfig}
+            onChangeArrayVariation={handleChangeArrayVariation}
+          />
+        </Main>
       </Container>
     </IsPlayingContext.Provider>
   );
