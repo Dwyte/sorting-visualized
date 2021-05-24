@@ -1,0 +1,44 @@
+import styled from "styled-components";
+import { SelectOption } from "../../types";
+import { Button, ButtonFlexGroup } from "../common/Button";
+
+const SelectLabel = styled.h4`
+  margin-top: 0px;
+  margin-bottom: 4px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+`;
+
+interface Props {
+  title: string;
+  options: SelectOption[];
+  activeOption: any;
+  onChange: (optionValue: any) => void;
+  disabled: boolean;
+}
+
+export const Select: React.FC<Props> = ({
+  title,
+  options,
+  activeOption,
+  disabled = true,
+  onChange,
+}) => {
+  return (
+    <div>
+      <SelectLabel>{title}</SelectLabel>
+      <ButtonFlexGroup>
+        {options.map((option) => (
+          <Button
+            onClick={() => onChange(option.value)}
+            isActive={activeOption === option.value}
+            disabled={disabled}
+          >
+            {option.label}
+          </Button>
+        ))}
+      </ButtonFlexGroup>
+    </div>
+  );
+};
