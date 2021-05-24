@@ -8,10 +8,15 @@ const SelectLabel = styled.h4`
   font-weight: 400;
   letter-spacing: 1px;
   text-transform: capitalize;
+
+  i {
+    margin-right: 4px;
+  }
 `;
 
 interface Props {
   title: string;
+  faIcon?: string;
   options: SelectOption[];
   activeOption: any;
   onChange: (optionValue: any) => void;
@@ -20,6 +25,7 @@ interface Props {
 
 export const Select: React.FC<Props> = ({
   title,
+  faIcon,
   options,
   activeOption,
   disabled = true,
@@ -27,7 +33,10 @@ export const Select: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <SelectLabel>{title}</SelectLabel>
+      <SelectLabel>
+        {faIcon && <i className={faIcon}></i>}
+        {title}
+      </SelectLabel>
       <ButtonFlexGroup>
         {options.map((option) => (
           <Button

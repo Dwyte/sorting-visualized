@@ -55,6 +55,7 @@ export const Header: React.FC<Props> = ({
       <HeaderControlsContainer>
         <Select
           title="Array Variation"
+          faIcon="fas fa-chart-bar"
           options={arrayVariationSelectOptions}
           activeOption={arrayVariation}
           onChange={onChangeArrayVariation}
@@ -62,6 +63,7 @@ export const Header: React.FC<Props> = ({
         />
         <Select
           title="Array Size"
+          faIcon="fas fa-sort-amount-up"
           options={arraySizeSelectOptions}
           activeOption={arraySizeConfig.arraySize}
           onChange={onChangeArraySize}
@@ -69,6 +71,7 @@ export const Header: React.FC<Props> = ({
         />
         <Select
           title="Visualizer Count"
+          faIcon="fas fa-square"
           options={visualizerCountSelectOptions}
           activeOption={visualizerCount}
           onChange={onChangeVisualizerCount}
@@ -76,6 +79,7 @@ export const Header: React.FC<Props> = ({
         />
         <Select
           title="Play Speed"
+          faIcon="fas fa-forward"
           options={playSpeedSelectOptions}
           activeOption={playSpeedConfig.playSpeed}
           onChange={onChangePlaySpeed}
