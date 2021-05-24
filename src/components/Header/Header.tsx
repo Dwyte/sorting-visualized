@@ -81,11 +81,22 @@ export const Header: React.FC<Props> = ({
           onChange={onChangePlaySpeed}
           disabled={isPlaying}
         />
+        <div>
+          <hr />
+        </div>
+
         <ButtonFlexGroup>
-          <Button onClick={onRandom} disabled={isPlaying} isActive>
+          <Button
+            padding="large"
+            onClick={onRandom}
+            disabled={isPlaying}
+            isActive
+          >
+            <i className="fas fa-dice-six"></i>
             Random
           </Button>
-          <Button onClick={onReset} isActive>
+          <Button padding="large" onClick={onReset} isActive>
+            <i className="fas fa-undo"></i>
             Reset
           </Button>
         </ButtonFlexGroup>
