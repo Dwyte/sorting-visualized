@@ -28,3 +28,8 @@ export interface ArraySizeConfig {
 }
 
 export type ArrayVariation = "Unique" | "Random";
+
+export interface SelectOption {
+  label: string;
+  value: any;
+}

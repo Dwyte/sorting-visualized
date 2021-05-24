@@ -3,7 +3,9 @@ import {
   ArrayVariation,
   PlaySpeed,
   PlaySpeedConfig,
+  SelectOption,
   SortingAlgorithm,
+  VisualizerCount,
 } from "./types";
 
 export const sortingAlgorithms: SortingAlgorithm[] = [
@@ -43,7 +45,7 @@ export const playSpeedConfigs: PlaySpeedConfig[] = [
   },
 ];
 
-export const visualizerCountConfigs = [1, 2, 4];
+export const visualizerCounts: VisualizerCount[] = [1, 2, 4];
 
 export const arraySizeConfigs: ArraySizeConfig[] = [
   { arraySize: "Small", actualSize: 10 },
@@ -52,3 +54,34 @@ export const arraySizeConfigs: ArraySizeConfig[] = [
 ];
 
 export const arrayVariations: ArrayVariation[] = ["Random", "Unique"];
+
+export const visualizerCountSelectOptions = visualizerCounts.map(
+  (config: VisualizerCount) => ({ label: config.toString(), value: config })
+);
+
+export const sortingAlgorithmsSelectOptions: SelectOption[] =
+  sortingAlgorithms.map((algorithm) => ({
+    label: algorithm,
+    value: algorithm,
+  }));
+
+export const arraySizeSelectOptions: SelectOption[] = arraySizeConfigs.map(
+  (arraySizeConfig: ArraySizeConfig) => ({
+    label: arraySizeConfig.arraySize,
+    value: arraySizeConfig.arraySize,
+  })
+);
+
+export const arrayVariationSelectOptions: SelectOption[] = arrayVariations.map(
+  (arrayVariation: ArrayVariation) => ({
+    label: arrayVariation,
+    value: arrayVariation,
+  })
+);
+
+export const playSpeedSelectOptions: SelectOption[] = playSpeedConfigs.map(
+  (playSpeedConfig: PlaySpeedConfig) => ({
+    label: `${playSpeedConfig.playSpeed}x`,
+    value: playSpeedConfig.playSpeed,
+  })
+);

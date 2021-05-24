@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const HeaderContainer = styled.header`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const TitleH1 = styled.h1`
   font-family: "Raleway";
   font-weight: 800;
@@ -15,4 +20,11 @@ export const SubtitleH2 = styled.h2`
   letter-spacing: 2px;
   margin-top: -4px;
   margin-left: 4px;
+`;
+
+export const HeaderControlsContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

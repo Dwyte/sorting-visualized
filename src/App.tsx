@@ -12,13 +12,14 @@ import {
   VisualizerCount,
   ArraySizeConfig,
   ArrayVariation,
+  ArraySize,
 } from "./types";
 
 import {
   arraySizeConfigs,
   playSpeedConfigs,
   sortingAlgorithms,
-  visualizerCountConfigs,
+  visualizerCounts,
 } from "./constants";
 
 import { generateSoringSteps } from "./sortingAlgorithms";
@@ -96,16 +97,16 @@ const App: React.FC = () => {
     }
   }, [currentStep, totalSteps]);
 
-  const changeVisualizerCount = (newCount: number) => {
+  const changeVisualizerCount = (newVisualizerCount: number) => {
     setActiveAlgorithms((currentActiveAlgorithms) => {
-      if (newCount === 1) {
+      if (newVisualizerCount === 1) {
         return [currentActiveAlgorithms[0]];
-      } else if (newCount === 2) {
+      } else if (newVisualizerCount === 2) {
         return [
           currentActiveAlgorithms[0],
           currentActiveAlgorithms[1] || "Merge",
         ];
-      } else if (newCount === 4) {
+      } else if (newVisualizerCount === 4) {
         return [
           currentActiveAlgorithms[0],
           currentActiveAlgorithms[1] || "Merge",
@@ -169,11 +170,9 @@ const App: React.FC = () => {
     setCurrentSortStep(parseInt(event.target.value));
   };
 
-  const handleChangePlaySpeed = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleChangePlaySpeed = (newPlaySpeed: number) => {
     const newPlaySpeedConfig = playSpeedConfigs.find(
-      (config) => config.playSpeed === parseInt(event.target.value)
+      (config) => config.playSpeed === newPlaySpeed
     );
 
     if (newPlaySpeedConfig) {
@@ -190,23 +189,13 @@ const App: React.FC = () => {
       });
     };
 
-  const handleChangeVisualizerCount = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const newVisualizerCount: number | undefined = visualizerCountConfigs.find(
-      (config) => config === parseInt(event.target.value)
-    );
-
-    if (newVisualizerCount) {
-      changeVisualizerCount(newVisualizerCount);
-    }
+  const handleChangeVisualizerCount = (newVisualizerCount: number) => {
+    changeVisualizerCount(newVisualizerCount);
   };
 
-  const handleChangeArraySizeConfig = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleChangeArraySizeConfig = (newArraySize: ArraySize) => {
     const newArraySizeConfig = arraySizeConfigs.find(
-      (config) => config.arraySize === event.target.value
+      (config) => config.arraySize === newArraySize
     );
 
     if (newArraySizeConfig) {
@@ -214,10 +203,8 @@ const App: React.FC = () => {
     }
   };
 
-  const handleChangeArrayVariation = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setArrayVariation(event.target.value as ArrayVariation);
+  const handleChangeArrayVariation = (newArrayVariation: ArrayVariation) => {
+    setArrayVariation(newArrayVariation);
   };
 
   return (

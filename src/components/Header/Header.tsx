@@ -1,13 +1,25 @@
 import { useContext } from "react";
 import {
-  arrayVariations,
-  arraySizeConfigs,
-  visualizerCountConfigs,
-  playSpeedConfigs,
+  arrayVariationSelectOptions,
+  arraySizeSelectOptions,
+  visualizerCountSelectOptions,
+  playSpeedSelectOptions,
 } from "../../constants";
 import { IsPlayingContext } from "../../contexts/IsPlayingContext";
-import { ArrayVariation, ArraySizeConfig, PlaySpeedConfig } from "../../types";
-import { SubtitleH2, TitleH1 } from "./style";
+import {
+  ArrayVariation,
+  ArraySizeConfig,
+  PlaySpeedConfig,
+  ArraySize,
+} from "../../types";
+import { Button, ButtonFlexGroup } from "../common/Button";
+import { Select } from "../Select";
+import {
+  HeaderControlsContainer,
+  HeaderContainer,
+  TitleH1,
+  SubtitleH2,
+} from "./style";
 
 interface Props {
   visualizerCount: number;
@@ -16,10 +28,10 @@ interface Props {
   playSpeedConfig: PlaySpeedConfig;
   onRandom: React.MouseEventHandler<HTMLButtonElement>;
   onReset: React.MouseEventHandler<HTMLButtonElement>;
-  onChangeVisualizerCount: React.ChangeEventHandler<HTMLSelectElement>;
-  onChangeArraySize: React.ChangeEventHandler<HTMLSelectElement>;
-  onChangeArrayVariation: React.ChangeEventHandler<HTMLSelectElement>;
-  onChangePlaySpeed: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeVisualizerCount: (newVisualizerCount: number) => void;
+  onChangeArraySize: (newArraySize: ArraySize) => void;
+  onChangeArrayVariation: (newArrayVariation: ArrayVariation) => void;
+  onChangePlaySpeed: (newPlaySpeed: number) => void;
 }
 
 export const Header: React.FC<Props> = ({
@@ -37,60 +49,47 @@ export const Header: React.FC<Props> = ({
   const isPlaying: boolean = useContext(IsPlayingContext);
 
   return (
-    <header>
+    <HeaderContainer>
       <TitleH1>Sorting, Visualized.</TitleH1>
-      <SubtitleH2>Developed by Dwyte</SubtitleH2>
-
-      <select
-        value={arrayVariation}
-        onChange={onChangeArrayVariation}
-        disabled={isPlaying}
-      >
-        {arrayVariations.map((varitiation: ArrayVariation) => (
-          <option key={varitiation} value={varitiation}>
-            {varitiation}
-          </option>
-        ))}
-      </select>
-      <select
-        value={arraySizeConfig.arraySize}
-        onChange={onChangeArraySize}
-        disabled={isPlaying}
-      >
-        {arraySizeConfigs.map((config: ArraySizeConfig) => (
-          <option key={config.arraySize} value={config.arraySize}>
-            {config.arraySize}
-          </option>
-        ))}
-      </select>
-      <select
-        value={visualizerCount}
-        onChange={onChangeVisualizerCount}
-        disabled={isPlaying}
-      >
-        {visualizerCountConfigs.map((visualizerCount: number) => (
-          <option key={visualizerCount} value={visualizerCount}>
-            {visualizerCount}
-          </option>
-        ))}
-      </select>
-
-      <button onClick={onRandom} disabled={isPlaying}>
-        Random
-      </button>
-      <button onClick={onReset}>Reset</button>
-
-      <select
-        value={playSpeedConfig.playSpeed}
-        onChange={onChangePlaySpeed}
-        disabled={isPlaying}
-      >
-        {playSpeedConfigs.map((config: PlaySpeedConfig) => (
-          <option key={config.playSpeed} value={config.playSpeed}>
-            {config.playSpeed}x
-          </option>
-        ))}
-      </select>
-    </header>
+      <SubtitleH2>DEVELOPED BY DWIGHT</SubtitleH2>
+      <HeaderControlsContainer>
+        <Select
+          title="Array Variation"
+          options={arrayVariationSelectOptions}
+          activeOption={arrayVariation}
+          onChange={onChangeArrayVariation}
+          disabled={isPlaying}
+        />
+        <Select
+          title="Array Size"
+          options={arraySizeSelectOptions}
+          activeOption={arraySizeConfig.arraySize}
+          onChange={onChangeArraySize}
+          disabled={isPlaying}
+        />
+        <Select
+          title="Visualizer Count"
+          options={visualizerCountSelectOptions}
+          activeOption={visualizerCount}
+          onChange={onChangeVisualizerCount}
+          disabled={isPlaying}
+        />
+        <Select
+          title="Play Speed"
+          options={playSpeedSelectOptions}
+          activeOption={playSpeedConfig.playSpeed}
+          onChange={onChangePlaySpeed}
+          disabled={isPlaying}
+        />
+        <ButtonFlexGroup>
+          <Button onClick={onRandom} disabled={isPlaying} isActive>
+            Random
+          </Button>
+          <Button onClick={onReset} isActive>
+            Reset
+          </Button>
+        </ButtonFlexGroup>
+      </HeaderControlsContainer>
+    </HeaderContainer>
   );
 };
