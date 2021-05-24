@@ -19,6 +19,7 @@ import {
   HeaderContainer,
   TitleH1,
   SubtitleH2,
+  Space,
 } from "./style";
 
 interface Props {
@@ -50,8 +51,13 @@ export const Header: React.FC<Props> = ({
 
   return (
     <HeaderContainer>
-      <TitleH1>Sorting, Visualized.</TitleH1>
-      <SubtitleH2>DEVELOPED BY DWIGHT</SubtitleH2>
+      <div>
+        <TitleH1>Sorting, Visualized.</TitleH1>
+        <SubtitleH2>DEVELOPED BY DWIGHT</SubtitleH2>
+      </div>
+
+      <Space />
+
       <HeaderControlsContainer>
         <Select
           title="Array Variation"
@@ -85,26 +91,22 @@ export const Header: React.FC<Props> = ({
           onChange={onChangePlaySpeed}
           disabled={isPlaying}
         />
-        <div>
-          <hr />
-        </div>
-
-        <ButtonFlexGroup>
-          <Button
-            padding="large"
-            onClick={onRandom}
-            disabled={isPlaying}
-            isActive
-          >
-            <i className="fas fa-dice-six"></i>
-            Random
-          </Button>
-          <Button padding="large" onClick={onReset} isActive>
-            <i className="fas fa-undo"></i>
-            Reset
-          </Button>
-        </ButtonFlexGroup>
       </HeaderControlsContainer>
+      <ButtonFlexGroup>
+        <Button
+          padding="large"
+          onClick={onRandom}
+          disabled={isPlaying}
+          isActive
+        >
+          <i className="fas fa-dice-six"></i>
+          Random
+        </Button>
+        <Button padding="large" onClick={onReset} isActive>
+          <i className="fas fa-undo"></i>
+          Reset
+        </Button>
+      </ButtonFlexGroup>
     </HeaderContainer>
   );
 };
