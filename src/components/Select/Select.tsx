@@ -20,7 +20,7 @@ interface Props {
   options: SelectOption[];
   activeOption: any;
   onChange: (optionValue: any) => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const Select: React.FC<Props> = ({
@@ -28,7 +28,7 @@ export const Select: React.FC<Props> = ({
   faIcon,
   options,
   activeOption,
-  disabled = true,
+  disabled = false,
   onChange,
 }) => {
   return (

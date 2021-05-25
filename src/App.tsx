@@ -19,7 +19,6 @@ import {
   arraySizeConfigs,
   playSpeedConfigs,
   sortingAlgorithms,
-  visualizerCounts,
 } from "./constants";
 
 import { generateSoringSteps } from "./sortingAlgorithms";
@@ -177,6 +176,16 @@ const App: React.FC = () => {
 
     if (newPlaySpeedConfig) {
       setPlaySpeedConfig(newPlaySpeedConfig);
+
+      if (playTimeout) {
+        clearInterval(playTimeout);
+        setPlayTimeout(
+          setInterval(
+            () => moveGraphDataStep(newPlaySpeedConfig.playStepSize),
+            newPlaySpeedConfig.playStepIntervalMS
+          )
+        );
+      }
     }
   };
 

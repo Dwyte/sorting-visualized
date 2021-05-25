@@ -92,7 +92,7 @@ export const Header: React.FC<Props> = ({
           options={playSpeedSelectOptions}
           activeOption={playSpeedConfig.playSpeed}
           onChange={onChangePlaySpeed}
-          disabled={isPlaying}
+          // disabled={isPlaying}
         />
       </HeaderControlsContainer>
       <ButtonFlexGroup>

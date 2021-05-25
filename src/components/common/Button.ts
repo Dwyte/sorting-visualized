@@ -19,7 +19,7 @@ export const Button = styled.button<ButtonProps>`
   :disabled {
     background: #111;
     cursor: initial;
-    color: #aaa;
+    color: #888;
   }
 
   background-color: ${({ isActive = true }) => (isActive ? "#222" : "#111")};
