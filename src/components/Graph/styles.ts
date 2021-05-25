@@ -11,4 +11,9 @@ export const BarItem = styled.div<{ value: number; color?: string }>`
   height: ${({ value }) => value}%;
   margin: 0 1px;
   flex: 1;
+
+  cursor: pointer;
+  :hover {
+    background-color: orange;
+  }
 `;
