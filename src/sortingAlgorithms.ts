@@ -15,8 +15,8 @@ export const insertionSort = (arrayToSort: Bar[]): Bar[][] => {
   for (let n = 1; n < arrayToSortCopy.length; n++) {
     for (let i = n - 1, j = n; j > 0; i--, j--) {
       const comparisonStep = deepCopyArray(arrayToSortCopy);
-      comparisonStep[i].color = "red";
-      comparisonStep[j].color = "red";
+      comparisonStep[i].color = "Crimson";
+      comparisonStep[j].color = "Crimson";
       sortingSteps.push(comparisonStep);
 
       if (arrayToSortCopy[i].value > arrayToSortCopy[j].value) {
@@ -25,8 +25,8 @@ export const insertionSort = (arrayToSort: Bar[]): Bar[][] => {
         arrayToSortCopy[j] = temp;
 
         const comparisonStep = deepCopyArray(arrayToSortCopy);
-        comparisonStep[i].color = "orange";
-        comparisonStep[j].color = "orange";
+        comparisonStep[i].color = "DarkOrange";
+        comparisonStep[j].color = "DarkOrange";
         sortingSteps.push(comparisonStep);
       } else {
         break;
@@ -34,11 +34,11 @@ export const insertionSort = (arrayToSort: Bar[]): Bar[][] => {
     }
 
     for (let i = 0; i < n; i++) {
-      arrayToSortCopy[i].color = "green";
+      arrayToSortCopy[i].color = "SpringGreen";
     }
   }
 
-  arrayToSortCopy[arrayToSort.length - 1].color = "green";
+  arrayToSortCopy[arrayToSort.length - 1].color = "SpringGreen";
   sortingSteps.push([...arrayToSortCopy]);
   return sortingSteps;
 };
@@ -50,8 +50,8 @@ export const bubbleSort = (arrayToSort: Bar[]): Bar[][] => {
   for (let n = arrayToSortCopy.length; n > 0; n--) {
     for (let i = 0, j = 1; j < n; i++, j++) {
       const comparisonStep = deepCopyArray(arrayToSortCopy);
-      comparisonStep[i].color = "red";
-      comparisonStep[j].color = "red";
+      comparisonStep[i].color = "Crimson";
+      comparisonStep[j].color = "Crimson";
       sortingSteps.push(comparisonStep);
 
       if (arrayToSortCopy[i].value > arrayToSortCopy[j].value) {
@@ -60,13 +60,13 @@ export const bubbleSort = (arrayToSort: Bar[]): Bar[][] => {
         arrayToSortCopy[j] = temp;
 
         const swapStep = deepCopyArray(arrayToSortCopy);
-        swapStep[i].color = "orange";
-        swapStep[j].color = "orange";
+        swapStep[i].color = "DarkOrange";
+        swapStep[j].color = "DarkOrange";
         sortingSteps.push(swapStep);
       }
     }
 
-    arrayToSortCopy[n - 1].color = "green";
+    arrayToSortCopy[n - 1].color = "SpringGreen";
   }
 
   sortingSteps.push([...arrayToSortCopy]);
@@ -83,7 +83,7 @@ export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
 
     for (let j = i; j < arrayToSortCopy.length; j++) {
       const currentStep = deepCopyArray(arrayToSortCopy);
-      currentStep[j].color = "red";
+      currentStep[j].color = "Crimson";
       sortingSteps.push(currentStep);
 
       if (minimum > arrayToSortCopy[j].value) {
@@ -92,7 +92,7 @@ export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
           color: "white",
         };
 
-        arrayToSortCopy[j].color = "orange";
+        arrayToSortCopy[j].color = "DarkOrange";
         sortingSteps.push(deepCopyArray(arrayToSortCopy));
 
         minimumIndex = j;
@@ -103,7 +103,7 @@ export const selectionSort = (arrayToSort: Bar[]): Bar[][] => {
     const temp: Bar = arrayToSortCopy[i];
     arrayToSortCopy[i] = arrayToSortCopy[minimumIndex];
     arrayToSortCopy[minimumIndex] = temp;
-    arrayToSortCopy[i].color = "green";
+    arrayToSortCopy[i].color = "SpringGreen";
 
     sortingSteps.push(deepCopyArray(arrayToSortCopy));
   }
@@ -129,8 +129,8 @@ export const mergeSort = (arrayToSort: Bar[]): Bar[][] => {
 
     while (i < toA && j < toB) {
       const compareStep = deepCopyArray(array);
-      compareStep[i].color = "red";
-      compareStep[j].color = "red";
+      compareStep[i].color = "Crimson";
+      compareStep[j].color = "Crimson";
       sortingSteps.push(compareStep);
 
       const currentA: Bar = array[i];
@@ -160,7 +160,7 @@ export const mergeSort = (arrayToSort: Bar[]): Bar[][] => {
 
       const copyStep = deepCopyArray(array);
       for (let k = low; k <= i; k++) {
-        copyStep[k].color = "green";
+        copyStep[k].color = "SpringGreen";
       }
       sortingSteps.push(copyStep);
     }
