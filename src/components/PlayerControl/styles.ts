@@ -1,21 +1,13 @@
 import styled from "styled-components";
+import { Button } from "../common/Button";
 
 export const Container = styled.div`
   display: flex;
   gap: 4px;
 `;
 
-export const StepButton = styled.button`
-  background-color: #222;
+export const StepButton = styled(Button)`
   padding: 8px 24px;
-  border-radius: 0;
-  cursor: pointer;
-  border: none;
-  color: white;
-
-  :hover {
-    background-color: #333;
-  }
 `;
 
 export const StepProgress = styled.input`
@@ -33,6 +25,10 @@ export const StepProgress = styled.input`
     border: none;
     height: 32px;
     width: 20px;
+
+    :hover {
+      background: orange;
+    }
   }
 
   // for chrome and safari
@@ -41,5 +37,9 @@ export const StepProgress = styled.input`
     background: white;
     height: 32px;
     width: 20px;
+
+    :hover {
+      background: orange;
+    }
   }
 `;

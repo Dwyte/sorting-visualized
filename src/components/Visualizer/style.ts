@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../common/Button";
 
 export const Container = styled.div`
   border: 2px solid #222;
@@ -6,7 +7,6 @@ export const Container = styled.div`
   height: 100%;
   gap: 4px;
   position: relative;
-
   flex-direction: column;
 `;
 
@@ -24,16 +24,6 @@ export const AlgorithmSelect = styled.div`
   top: -2px;
 `;
 
-export const AlgorithmOption = styled.button<{ isActive: boolean }>`
-  background-color: ${({ isActive }) => (isActive ? "#222" : "#111")};
+export const AlgorithmOption = styled(Button)`
   width: ${({ isActive }) => (isActive ? "108px" : "initial")};
-  padding: 8px 10px;
-  border-radius: 0;
-  cursor: pointer;
-  color: white;
-  border: 0;
-
-  :hover {
-    background-color: #333;
-  }
 `;

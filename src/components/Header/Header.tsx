@@ -100,12 +100,13 @@ export const Header: React.FC<Props> = ({
           padding="large"
           onClick={onRandom}
           disabled={isPlaying}
+          isIconLarge
           isActive
         >
           <i className="fas fa-dice-six"></i>
           Random
         </Button>
-        <Button padding="large" onClick={onReset} isActive>
+        <Button padding="large" onClick={onReset} isIconLarge isActive>
           <i className="fas fa-undo"></i>
           Reset
         </Button>
