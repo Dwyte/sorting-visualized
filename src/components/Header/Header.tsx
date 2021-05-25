@@ -12,6 +12,7 @@ import {
   PlaySpeedConfig,
   ArraySize,
 } from "../../types";
+import { Anchor } from "../common/Anchor";
 import { Button, ButtonFlexGroup } from "../common/Button";
 import { Select } from "../Select";
 import {
@@ -53,7 +54,9 @@ export const Header: React.FC<Props> = ({
     <HeaderContainer>
       <div>
         <TitleH1>Sorting, Visualized.</TitleH1>
-        <SubtitleH2>DEVELOPED BY DWIGHT</SubtitleH2>
+        <SubtitleH2>
+          DEVELOPED BY <Anchor href="https://dwyte.github.io">DWIGHT</Anchor>
+        </SubtitleH2>
       </div>
 
       <Space />
