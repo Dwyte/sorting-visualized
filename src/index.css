@@ -2,6 +2,9 @@
 * {
   box-sizing: border-box;
   font-family: "Roboto Mono", monospace;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 html,
