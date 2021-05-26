@@ -4,13 +4,13 @@ import { Button, ButtonFlexGroup } from "../common/Button";
 
 const SelectLabel = styled.h4`
   margin-top: 0px;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
   font-weight: 400;
   letter-spacing: 1px;
   text-transform: capitalize;
 
   i {
-    margin-right: 4px;
+    margin-right: 0.25rem;
   }
 `;
 

@@ -25,22 +25,22 @@ export const Button = styled.button<ButtonProps>`
   background-color: ${({ isActive = true }) => (isActive ? "#222" : "#111")};
   color: ${({ isActive = true }) => (isActive ? "#fff" : "#ccc")};
   padding: ${({ padding = "regular" }) =>
-    padding === "regular" ? "8px" : "12px"};
+    padding === "regular" ? "0.5rem" : "0.75rem"};
 
   ${({ isIconLarge = false }) =>
     isIconLarge &&
     css`
       i {
         display: block;
-        font-size: 20px;
-        margin-bottom: 4px;
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
       }
     `}
 `;
 
 export const ButtonFlexGroup = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 0.25rem;
   button {
     flex: 1;
   }

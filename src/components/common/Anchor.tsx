@@ -6,12 +6,12 @@ interface Props {
 
 const A = styled.a`
   i {
-    margin-right: 4px;
+    margin-right: 0.25rem;
   }
 
   color: white;
   text-decoration: none;
-  padding-bottom: 2px;
+  padding-bottom: 0.125rem;
   border-bottom: 1px dashed orange;
 
   :hover {

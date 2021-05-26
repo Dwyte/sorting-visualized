@@ -3,11 +3,11 @@ import { Button } from "../common/Button";
 
 export const Container = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 0.25rem;
 `;
 
 export const StepButton = styled(Button)`
-  padding: 8px 24px;
+  padding: 0.5rem 1.5rem;
 `;
 
 export const StepProgress = styled.input`
@@ -23,7 +23,7 @@ export const StepProgress = styled.input`
     -moz-appearance: none;
     border-radius: 0;
     border: none;
-    height: 32px;
+    height: 100%;
     width: 20px;
 
     :hover {
@@ -32,10 +32,14 @@ export const StepProgress = styled.input`
   }
 
   // for chrome and safari
+  ::-webkit-slider-runnable-track {
+    height: 100%;
+  }
+
   ::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: white;
-    height: 32px;
+    height: 100%;
     width: 20px;
 
     :hover {

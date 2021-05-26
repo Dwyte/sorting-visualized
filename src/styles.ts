@@ -5,19 +5,19 @@ export const Container = styled.div`
   grid-template-columns: 3fr 8fr;
   padding: 4rem 7rem;
   display: grid;
-  gap: 8px;
+  gap: 0.5rem;
   height: 100%;
 `;
 
 export const Main = styled.main`
   flex-direction: column;
   display: flex;
-  gap: 4px;
+  gap: 0.25rem;
   height: 100%;
 `;
 
 export const VisualizersGrid = styled.div<{ visualizerCount: VisualizerCount }>`
-  grid-gap: 4px;
+  grid-gap: 0.25rem;
   display: grid;
   height: 100%;
 

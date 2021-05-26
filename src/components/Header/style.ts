@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 export const TitleH1 = styled.h1`
   font-family: "Raleway";
   font-weight: 800;
-  font-size: 54px;
+  font-size: 3.5rem;
   font-style: italic;
   margin: 0;
 `;
@@ -17,22 +17,22 @@ export const TitleH1 = styled.h1`
 export const SubtitleH2 = styled.h2`
   font-family: "Roboto Mono";
   font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 2px;
-  margin-top: -8px;
-  margin-left: 4px;
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  margin-top: -0.5rem;
+  margin-left: 0.25rem;
   margin-bottom: 0;
 `;
 
 export const HeaderControlsContainer = styled.div`
   border-bottom: 1px solid #555;
   border-top: 1px solid #555;
-  padding: 8px 0;
+  padding: 0.5rem 0;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 export const Space = styled.div`

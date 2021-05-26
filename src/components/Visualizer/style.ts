@@ -5,19 +5,19 @@ export const Container = styled.div`
   border: 2px solid #222;
   display: flex;
   height: 100%;
-  gap: 4px;
+  gap: 0.25rem;
   position: relative;
   flex-direction: column;
 `;
 
 export const GraphContainer = styled.div`
-  padding: 4px;
+  padding: 0.25rem;
   flex: 1;
 `;
 
 export const AlgorithmSelect = styled.div`
-  padding-bottom: 24px;
-  padding-right: 24px;
+  padding-bottom: 1.5rem;
+  padding-right: 1.5rem;
   position: absolute;
   display: flex;
   left: -2px;
@@ -25,5 +25,5 @@ export const AlgorithmSelect = styled.div`
 `;
 
 export const AlgorithmOption = styled(Button)`
-  width: ${({ isActive }) => (isActive ? "108px" : "initial")};
+  width: ${({ isActive }) => (isActive ? "6.75rem" : "initial")};
 `;
