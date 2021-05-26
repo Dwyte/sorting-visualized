@@ -9,9 +9,13 @@ export const HeaderContainer = styled.header`
 export const TitleH1 = styled.h1`
   font-family: "Raleway";
   font-weight: 800;
-  font-size: 3.5rem;
+  font-size: 3.25rem;
   font-style: italic;
   margin: 0;
+
+  @media screen and (min-width: 1600px) {
+    font-size: 4rem;
+  }
 `;
 
 export const SubtitleH2 = styled.h2`
@@ -19,9 +23,13 @@ export const SubtitleH2 = styled.h2`
   font-weight: 400;
   font-size: 0.75rem;
   letter-spacing: 0.125rem;
-  margin-top: -0.5rem;
+  margin-top: -0.25rem;
   margin-left: 0.25rem;
   margin-bottom: 0;
+
+  @media screen and (min-width: 1600px) {
+    font-size: 1rem;
+  }
 `;
 
 export const HeaderControlsContainer = styled.div`
