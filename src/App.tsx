@@ -238,12 +238,13 @@ const App: React.FC = () => {
           >
             {activeAlgorithms.map((activeAlgorithm, index: number) => (
               <Visualizer
+                key={index}
                 sortingAlgorithm={activeAlgorithm}
                 onSelectAlgorithm={handleChangeAlgorithm(index)}
+                currentStep={currentStep}
                 sortingSteps={
                   allSortingSteps?.[activeAlgorithm] || [dataToSort]
                 }
-                currentStep={currentStep}
               />
             ))}
           </VisualizersGrid>

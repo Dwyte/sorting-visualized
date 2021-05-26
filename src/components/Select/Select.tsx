@@ -40,6 +40,7 @@ export const Select: React.FC<Props> = ({
       <ButtonFlexGroup>
         {options.map((option) => (
           <Button
+            key={option.value}
             onClick={() => onChange(option.value)}
             isActive={activeOption === option.value}
             disabled={disabled}
