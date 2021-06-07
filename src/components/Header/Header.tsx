@@ -63,6 +63,14 @@ export const Header: React.FC<Props> = ({
 
       <HeaderControlsContainer>
         <Select
+          title="Visualizers"
+          faIcon="fas fa-square"
+          options={visualizerCountSelectOptions}
+          activeOption={visualizerCount}
+          onChange={onChangeVisualizerCount}
+          disabled={isPlaying}
+        />
+        <Select
           title="Variation"
           faIcon="fas fa-chart-bar"
           options={arrayVariationSelectOptions}
@@ -71,21 +79,14 @@ export const Header: React.FC<Props> = ({
           disabled={isPlaying}
         />
         <Select
-          title="Size"
+          title="Length"
           faIcon="fas fa-sort-amount-up"
           options={arraySizeSelectOptions}
           activeOption={arraySizeConfig.arraySize}
           onChange={onChangeArraySize}
           disabled={isPlaying}
         />
-        <Select
-          title="Visualizers"
-          faIcon="fas fa-square"
-          options={visualizerCountSelectOptions}
-          activeOption={visualizerCount}
-          onChange={onChangeVisualizerCount}
-          disabled={isPlaying}
-        />
+
         <Select
           title="Speed"
           faIcon="fas fa-forward"
@@ -104,7 +105,7 @@ export const Header: React.FC<Props> = ({
           isActive
         >
           <i className="fas fa-dice-six"></i>
-          Random
+          Randomize
         </Button>
         <Button padding="large" onClick={onReset} isIconLarge isActive>
           <i className="fas fa-undo"></i>

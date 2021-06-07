@@ -33,7 +33,7 @@ export const SubtitleH2 = styled.h2`
 `;
 
 export const HeaderControlsContainer = styled.div`
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #222;
   padding: 0.25rem 0rem;
   flex: 0 0 auto;
   display: flex;

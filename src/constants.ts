@@ -46,7 +46,11 @@ export const playSpeedConfigs: PlaySpeedConfig[] = [
   },
 ];
 
-export const visualizerCounts: VisualizerCount[] = [1, 2, 4];
+export const visualizerCountSelectOptions = [
+  { label: "Single", value: 1 },
+  { label: "Double", value: 2 },
+  { label: "Quadruple", value: 4 },
+];
 
 export const arraySizeConfigs: ArraySizeConfig[] = [
   { arraySize: "Small", actualSize: 10 },
@@ -55,10 +59,6 @@ export const arraySizeConfigs: ArraySizeConfig[] = [
 ];
 
 export const arrayVariations: ArrayVariation[] = ["Random", "Unique"];
-
-export const visualizerCountSelectOptions = visualizerCounts.map(
-  (config: VisualizerCount) => ({ label: config.toString(), value: config })
-);
 
 export const sortingAlgorithmsSelectOptions: SelectOption[] =
   sortingAlgorithms.map((algorithm) => ({
