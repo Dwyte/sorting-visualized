@@ -182,6 +182,88 @@ export const mergeSort = (arrayToSort: Bar[]): Bar[][] => {
   return sortingSteps;
 };
 
+export const quickSort = (arrayToSort: Bar[]): Bar[][] => {
+  const arrayToSortCopy = deepCopyArray(arrayToSort);
+  const sortingSteps = [deepCopyArray(arrayToSort)];
+
+  const partition = (array: Bar[], startIndex: number, endIndex: number) => {
+    const pivot: Bar = array[endIndex];
+    let partitionIndex: number = startIndex;
+
+    const pivotStep: Bar[] = deepCopyArray(array);
+    pivotStep[endIndex].color = "DarkOrange";
+    pivotStep[partitionIndex].color = "Aqua";
+    sortingSteps.push(pivotStep);
+
+    for (let i = startIndex; i < endIndex; i++) {
+      const currBar: Bar = array[i];
+
+      const compareStep: Bar[] = deepCopyArray(array);
+      compareStep[partitionIndex].color = "Aqua";
+      compareStep[endIndex].color = "DarkOrange";
+      compareStep[i].color = "Crimson";
+      sortingSteps.push(compareStep);
+
+      if (currBar.value <= pivot.value) {
+        if (partitionIndex !== i) {
+          const temp: number = array[partitionIndex].value;
+          array[partitionIndex].value = currBar.value;
+          currBar.value = temp;
+
+          const swapStep: Bar[] = deepCopyArray(array);
+          swapStep[endIndex].color = "DarkOrange";
+          swapStep[partitionIndex].color = "SpringGreen";
+          swapStep[i].color = "SpringGreen";
+          sortingSteps.push(swapStep);
+        }
+
+        partitionIndex++;
+      }
+    }
+
+    const beforePartSwapStep: Bar[] = deepCopyArray(array);
+    beforePartSwapStep[partitionIndex].color = "Aqua";
+    beforePartSwapStep[endIndex].color = "DarkOrange";
+    sortingSteps.push(beforePartSwapStep);
+
+    const temp: number = array[partitionIndex].value;
+    array[partitionIndex].value = pivot.value;
+    pivot.value = temp;
+
+    const partSwapStep: Bar[] = deepCopyArray(array);
+    partSwapStep[endIndex].color = "SpringGreen";
+    partSwapStep[partitionIndex].color = "SpringGreen";
+    sortingSteps.push(partSwapStep);
+
+    return partitionIndex;
+  };
+
+  const sort = (array: Bar[], startIndex: number, endIndex: number) => {
+    if (startIndex >= endIndex) {
+      return array;
+    }
+
+    const partitionIndex: number = partition(array, startIndex, endIndex);
+    sort(array, startIndex, partitionIndex - 1);
+    sort(array, partitionIndex + 1, endIndex);
+    return array;
+  };
+
+  const sortedArray: Bar[] = sort(
+    arrayToSortCopy,
+    0,
+    arrayToSortCopy.length - 1
+  );
+
+  sortedArray.forEach((bar: Bar) => {
+    bar.color = "SpringGreen";
+  });
+
+  sortingSteps.push(sortedArray);
+
+  return sortingSteps;
+};
+
 export const generateSoringSteps = (
   arrayToSort: Bar[],
   algorithm: SortingAlgorithm = "Merge"
@@ -195,6 +277,8 @@ export const generateSoringSteps = (
       return insertionSort(arrayToSort);
     case "Merge":
       return mergeSort(arrayToSort);
+    case "Quick":
+      return quickSort(arrayToSort);
     default:
       throw Error("Algorithm not implemented.");
   }

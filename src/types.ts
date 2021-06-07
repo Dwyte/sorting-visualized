@@ -11,7 +11,12 @@ export interface PlaySpeedConfig {
   playStepIntervalMS: number;
 }
 
-export type SortingAlgorithm = "Bubble" | "Selection" | "Insertion" | "Merge";
+export type SortingAlgorithm =
+  | "Bubble"
+  | "Selection"
+  | "Insertion"
+  | "Merge"
+  | "Quick";
 
 export type VisualizerCount = 1 | 2 | 4;
 

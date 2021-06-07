@@ -13,6 +13,7 @@ export const sortingAlgorithms: SortingAlgorithm[] = [
   "Bubble",
   "Insertion",
   "Selection",
+  "Quick",
 ];
 
 export const playSpeeds: PlaySpeed[] = [1, 2, 3, 4, 5];
