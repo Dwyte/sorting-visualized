@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 `;
 
 export const TitleH1 = styled.h1`
   font-family: "Raleway";
   font-weight: 800;
-  font-size: 3.25rem;
+  font-size: 3.375rem;
   font-style: italic;
   margin: 0;
 
@@ -33,9 +33,8 @@ export const SubtitleH2 = styled.h2`
 `;
 
 export const HeaderControlsContainer = styled.div`
-  border-bottom: 1px solid #555;
-  border-top: 1px solid #555;
-  padding: 0.5rem 0;
+  border-bottom: 2px solid #333;
+  padding: 0.25rem 0rem;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;

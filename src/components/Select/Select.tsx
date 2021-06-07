@@ -2,12 +2,13 @@ import styled from "styled-components";
 import { SelectOption } from "../../types";
 import { Button, ButtonFlexGroup } from "../common/Button";
 
-const SelectLabel = styled.h4`
+const SelectLabel = styled.h2`
+  font-size: 0.8rem;
   margin-top: 0px;
   margin-bottom: 0.25rem;
   font-weight: 400;
   letter-spacing: 1px;
-  text-transform: capitalize;
+  text-transform: uppercase;
 
   i {
     margin-right: 0.25rem;
