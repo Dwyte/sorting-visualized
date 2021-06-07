@@ -16,12 +16,11 @@ export const GraphContainer = styled.div`
 `;
 
 export const AlgorithmSelect = styled.div`
-  padding-bottom: 1.5rem;
-  padding-right: 1.5rem;
+  padding-bottom: 2rem;
+  padding-right: 2rem;
   position: absolute;
+  flex-direction: column;
   display: flex;
-  left: -2px;
-  top: -2px;
 `;
 
 export const AlgorithmOption = styled(Button)`

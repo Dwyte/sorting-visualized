@@ -9,11 +9,11 @@ import {
 } from "./types";
 
 export const sortingAlgorithms: SortingAlgorithm[] = [
+  "Quick",
   "Merge",
   "Bubble",
   "Insertion",
   "Selection",
-  "Quick",
 ];
 
 export const playSpeeds: PlaySpeed[] = [1, 2, 3, 4, 5];

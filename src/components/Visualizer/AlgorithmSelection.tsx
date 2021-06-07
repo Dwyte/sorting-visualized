@@ -33,7 +33,7 @@ export const AlgorithmSelection: React.FC<Props> = ({
         onClick={disabled ? undefined : handleActivateSelection}
         isActive
       >
-        {activeAlgorithm} {!disabled && <i className="fas fa-caret-right"></i>}
+        {activeAlgorithm} {!disabled && <i className="fas fa-caret-down"></i>}
       </AlgorithmOption>
 
       {!disabled &&
