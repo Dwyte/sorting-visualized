@@ -21,11 +21,12 @@ export const TitleH1 = styled.h1`
 export const SubtitleH2 = styled.h2`
   font-family: "Roboto Mono";
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   letter-spacing: 0.125rem;
   margin-top: -0.25rem;
   margin-left: 0.25rem;
   margin-bottom: 0;
+  line-height: 1.25rem;
 
   @media screen and (min-width: 1600px) {
     font-size: 1rem;

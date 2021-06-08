@@ -55,7 +55,11 @@ export const Header: React.FC<Props> = ({
       <div>
         <TitleH1>Sorting, Visualized.</TitleH1>
         <SubtitleH2>
-          DEVELOPED BY <Anchor href="https://dwyte.github.io">DWIGHT</Anchor>
+          <Anchor
+            href="https://www.github.com/dwyte/sorting-visualized"
+            faClassName="fas fa-code"
+          />{" "}
+          DEVELOPED BY <Anchor href="https://dwyte.github.io" label="DWIGHT" />
         </SubtitleH2>
       </div>
 
