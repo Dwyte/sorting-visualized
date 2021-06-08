@@ -143,7 +143,7 @@ const App: React.FC = () => {
   };
 
   const handlePlay = () => {
-    if (!playTimeout) {
+    if (!playTimeout && currentStep < totalSteps - 1) {
       setPlayTimeout(
         setInterval(
           () => moveGraphDataStep(playSpeedConfig.playStepSize),
