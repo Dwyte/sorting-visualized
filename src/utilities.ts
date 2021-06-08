@@ -50,7 +50,7 @@ export const generateRandomGraphData = (
       const randomTotalRange: number = randomRange * 2 + 1;
 
       nearlyArray.forEach((_, index: number) => {
-        if (Math.random() < 0.5) {
+        if (Math.random() < 0.8) {
           let newIndex: number =
             index +
             (Math.floor(Math.random() * randomTotalRange) - randomRange);
