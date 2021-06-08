@@ -166,6 +166,11 @@ const App: React.FC = () => {
   };
 
   const handleChangeSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (playTimeout) {
+      clearInterval(playTimeout);
+      setPlayTimeout(null);
+    }
+
     setCurrentSortStep(parseInt(event.target.value));
   };
 
