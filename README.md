@@ -1,29 +1,65 @@
-# Sorting Visualized
+# Sorting, Visualized.
 
-A cool sorting visualizer. My own spin-off of the dozens sorting visualizers out there. This is primarily to reinforce my knowledge in algorithms and web development.
+A slick looking and fully featured sorting visualizer. My own spin-off of the dozens sorting visualizers out there. This is primarily to reinforce my knowledge in algorithms and web development.
 
 ## Features
 
-1. Visualize a Sorting Algorithms.
+1. Visualize different Sorting Algorithms.
 
    - Selection Sort
    - Bubble Sort
    - Insertion Sort
    - Merge Sort
-   - Bogo Sort
+   - Quick Sort
 
 2. Generate Arrays to Sort.
 
-   - Adjust array size
-   - Random, other.
+   - Choose Array Lenght (Small, Medium Large).
+   - Choose Array Variation (Unique, Random, Reversed, Nearly Sorted).
 
-3. Play and Pause Visualization.
+3. Play and Pause Visualization in real-time.
 
-   - Step-by-step buttons
-   - Adjust visualization speed
+   - Next and Previous buttons for step-by-step visualization.
+   - Adjust visualization speed (1x to 5x).
 
-4. Show Brief Infos about the algorithms
+4. Multi-Visualizations.
+   - Single, Double and Quadruple screens.
 
-   - Time and Space Complexity
+## Setup
 
-5. Visualize multiple algorithms at the same time.
+1. Clone the repository.
+
+```bash
+git clone https://github.com/Dwyte/sorting-visualized.git
+```
+
+2. Go to the directory and install Dependencies.
+
+```
+npm install
+```
+
+3. Run the project locally.
+
+```
+npm run start
+```
+
+4. Create a build.
+
+```
+npm run build
+```
+
+5. Deploy to github pages..
+
+```
+npm run deploy
+```
+
+## Screenshots
+
+![Screenshot00](./screenshots/Screenshot00.png)
+![Screenshot01](./screenshots/Screenshot01.png)
+![Screenshot02](./screenshots/Screenshot02.png)
+![Screenshot03](./screenshots/Screenshot03.png)
