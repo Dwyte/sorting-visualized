@@ -32,7 +32,7 @@ export interface ArraySizeConfig {
   actualSize: number;
 }
 
-export type ArrayVariation = "Unique" | "Random";
+export type ArrayVariation = "Unique" | "Random" | "Reversed" | "Nearly";
 
 export interface SelectOption {
   label: string;

@@ -58,7 +58,12 @@ export const arraySizeConfigs: ArraySizeConfig[] = [
   { arraySize: "Large", actualSize: 50 },
 ];
 
-export const arrayVariations: ArrayVariation[] = ["Random", "Unique"];
+export const arrayVariations: ArrayVariation[] = [
+  "Unique",
+  "Random",
+  "Reversed",
+  "Nearly",
+];
 
 export const sortingAlgorithmsSelectOptions: SelectOption[] =
   sortingAlgorithms.map((algorithm) => ({
