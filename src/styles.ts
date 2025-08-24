@@ -2,11 +2,18 @@ import styled from "styled-components";
 import { VisualizerCount } from "./types";
 
 export const Container = styled.div`
-  grid-template-columns: 3fr 8fr;
-  padding: 4rem 7rem;
-  display: grid;
-  gap: 0.25rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 0.25rem;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 3fr 8fr;
+    padding: 3rem 4rem;
+    display: grid;
+    gap: 0.25rem;
+  }
 `;
 
 export const Main = styled.main`

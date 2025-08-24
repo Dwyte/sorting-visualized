@@ -3,15 +3,18 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 1rem;
 `;
 
 export const TitleH1 = styled.h1`
   font-family: "Raleway";
   font-weight: 800;
-  font-size: 3.375rem;
   font-style: italic;
   margin: 0;
+
+  @media screen and (min-width: 768px) {
+    font-size: 3.375rem;
+  }
 
   @media screen and (min-width: 1600px) {
     font-size: 4rem;
@@ -34,7 +37,6 @@ export const SubtitleH2 = styled.h2`
 `;
 
 export const HeaderControlsContainer = styled.div`
-  border-bottom: 2px solid #222;
   padding: 0.25rem 0rem;
   flex: 0 0 auto;
   display: flex;
@@ -43,6 +45,12 @@ export const HeaderControlsContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export const Space = styled.div`
-  flex: 1 0 auto;
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @media screen and (min-width: 768px) {
+    flex: 1;
+  }
 `;

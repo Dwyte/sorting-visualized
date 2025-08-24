@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { SelectOption } from "../../types";
 import { Button, ButtonFlexGroup } from "../common/Button";
 
-const SelectLabel = styled.h2`
+const SelectLabel = styled.h3`
   font-size: 0.8rem;
   margin-top: 0px;
   margin-bottom: 0.25rem;

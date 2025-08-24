@@ -16,8 +16,6 @@ export const GraphContainer = styled.div`
 `;
 
 export const AlgorithmSelect = styled.div`
-  padding-bottom: 2rem;
-  padding-right: 2rem;
   position: absolute;
   flex-direction: column;
   display: flex;

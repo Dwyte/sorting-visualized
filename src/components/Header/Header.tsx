@@ -20,7 +20,7 @@ import {
   HeaderContainer,
   TitleH1,
   SubtitleH2,
-  Space,
+  TitleContainer,
 } from "./style";
 
 interface Props {
@@ -52,7 +52,7 @@ export const Header: React.FC<Props> = ({
 
   return (
     <HeaderContainer>
-      <div>
+      <TitleContainer>
         <TitleH1>Sorting, Visualized.</TitleH1>
         <SubtitleH2>
           <Anchor
@@ -61,61 +61,61 @@ export const Header: React.FC<Props> = ({
           />{" "}
           DEVELOPED BY <Anchor href="https://dwyte.github.io" label="DWIGHT" />
         </SubtitleH2>
+      </TitleContainer>
+
+      <div>
+        <HeaderControlsContainer>
+          <Select
+            title="Visualizers"
+            faIcon="fas fa-square"
+            options={visualizerCountSelectOptions}
+            activeOption={visualizerCount}
+            onChange={onChangeVisualizerCount}
+            disabled={isPlaying}
+          />
+          <Select
+            title="Variation"
+            faIcon="fas fa-chart-bar"
+            options={arrayVariationSelectOptions}
+            activeOption={arrayVariation}
+            onChange={onChangeArrayVariation}
+            disabled={isPlaying}
+          />
+          <Select
+            title="Length"
+            faIcon="fas fa-sort-amount-up"
+            options={arraySizeSelectOptions}
+            activeOption={arraySizeConfig.arraySize}
+            onChange={onChangeArraySize}
+            disabled={isPlaying}
+          />
+
+          <Select
+            title="Speed"
+            faIcon="fas fa-forward"
+            options={playSpeedSelectOptions}
+            activeOption={playSpeedConfig.playSpeed}
+            onChange={onChangePlaySpeed}
+            // disabled={isPlaying}
+          />
+        </HeaderControlsContainer>
+        <ButtonFlexGroup>
+          <Button
+            $padding="large"
+            onClick={onRandom}
+            disabled={isPlaying}
+            $isIconLarge
+            $isActive
+          >
+            <i className="fas fa-dice-six"></i>
+            Randomize
+          </Button>
+          <Button $padding="large" onClick={onReset} $isIconLarge $isActive>
+            <i className="fas fa-undo"></i>
+            Reset
+          </Button>
+        </ButtonFlexGroup>
       </div>
-
-      <Space />
-
-      <HeaderControlsContainer>
-        <Select
-          title="Visualizers"
-          faIcon="fas fa-square"
-          options={visualizerCountSelectOptions}
-          activeOption={visualizerCount}
-          onChange={onChangeVisualizerCount}
-          disabled={isPlaying}
-        />
-        <Select
-          title="Variation"
-          faIcon="fas fa-chart-bar"
-          options={arrayVariationSelectOptions}
-          activeOption={arrayVariation}
-          onChange={onChangeArrayVariation}
-          disabled={isPlaying}
-        />
-        <Select
-          title="Length"
-          faIcon="fas fa-sort-amount-up"
-          options={arraySizeSelectOptions}
-          activeOption={arraySizeConfig.arraySize}
-          onChange={onChangeArraySize}
-          disabled={isPlaying}
-        />
-
-        <Select
-          title="Speed"
-          faIcon="fas fa-forward"
-          options={playSpeedSelectOptions}
-          activeOption={playSpeedConfig.playSpeed}
-          onChange={onChangePlaySpeed}
-          // disabled={isPlaying}
-        />
-      </HeaderControlsContainer>
-      <ButtonFlexGroup>
-        <Button
-          $padding="large"
-          onClick={onRandom}
-          disabled={isPlaying}
-          $isIconLarge
-          $isActive
-        >
-          <i className="fas fa-dice-six"></i>
-          Randomize
-        </Button>
-        <Button $padding="large" onClick={onReset} $isIconLarge $isActive>
-          <i className="fas fa-undo"></i>
-          Reset
-        </Button>
-      </ButtonFlexGroup>
     </HeaderContainer>
   );
 };
