@@ -1,21 +1,23 @@
 {
   "name": "sorting-visualized",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "styled-components": "^6.1.19",
-    "@fortawesome/fontawesome-free": "^5.15.3"
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "@eslint/js": "^9.33.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
