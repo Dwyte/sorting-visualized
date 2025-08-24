@@ -1,11 +1,10 @@
-import {
+import type {
   ArraySizeConfig,
   ArrayVariation,
   PlaySpeed,
   PlaySpeedConfig,
   SelectOption,
   SortingAlgorithm,
-  VisualizerCount,
 } from "./types";
 
 export const sortingAlgorithms: SortingAlgorithm[] = [

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
 interface ButtonProps {
-  isActive?: boolean;
-  padding?: "regular" | "large";
-  isIconLarge?: boolean;
+  $isActive?: boolean;
+  $padding?: "regular" | "large";
+  $isIconLarge?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -12,23 +12,23 @@ export const Button = styled.button<ButtonProps>`
   margin: 0;
   border: 0;
 
-  :hover:not(:disabled) {
+  &:hover:not(:disabled) {
     background-color: #333;
     color: white;
   }
 
-  :disabled {
+  &:disabled {
     cursor: initial;
     color: #777;
   }
 
-  background-color: ${({ isActive = true }) => (isActive ? "#222" : "#111")};
-  color: ${({ isActive = true }) => (isActive ? "#fff" : "#ccc")};
-  padding: ${({ padding = "regular" }) =>
-    padding === "regular" ? "0.5rem" : "0.75rem"};
+  background-color: ${({ $isActive = true }) => ($isActive ? "#222" : "#111")};
+  color: ${({ $isActive = true }) => ($isActive ? "#fff" : "#ccc")};
+  padding: ${({ $padding = "regular" }) =>
+    $padding === "regular" ? "0.5rem" : "0.75rem"};
 
-  ${({ isIconLarge = false }) =>
-    isIconLarge &&
+  ${(props) =>
+    props.$isIconLarge &&
     css`
       i {
         display: block;

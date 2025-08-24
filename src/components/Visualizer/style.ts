@@ -24,5 +24,5 @@ export const AlgorithmSelect = styled.div`
 `;
 
 export const AlgorithmOption = styled(Button)`
-  width: ${({ isActive }) => (isActive ? "6.75rem" : "initial")};
+  width: ${({ $isActive }) => ($isActive ? "6.75rem" : "initial")};
 `;

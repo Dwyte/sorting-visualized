@@ -102,16 +102,16 @@ export const Header: React.FC<Props> = ({
       </HeaderControlsContainer>
       <ButtonFlexGroup>
         <Button
-          padding="large"
+          $padding="large"
           onClick={onRandom}
           disabled={isPlaying}
-          isIconLarge
-          isActive
+          $isIconLarge
+          $isActive
         >
           <i className="fas fa-dice-six"></i>
           Randomize
         </Button>
-        <Button padding="large" onClick={onReset} isIconLarge isActive>
+        <Button $padding="large" onClick={onReset} $isIconLarge $isActive>
           <i className="fas fa-undo"></i>
           Reset
         </Button>

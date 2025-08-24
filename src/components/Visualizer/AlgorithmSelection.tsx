@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { sortingAlgorithms } from "../../constants";
-import { SortingAlgorithm } from "../../types";
+import type { SortingAlgorithm } from "../../types";
 import { AlgorithmOption, AlgorithmSelect } from "./style";
 
 interface Props {
@@ -23,7 +23,7 @@ export const AlgorithmSelection: React.FC<Props> = ({
   const handleMouseLeave = () => setIsSelecting(false);
   const handleActivateSelection = () => setIsSelecting(!isSelecting);
   const handleOptionClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onChange((event.target as any).value);
+    onChange(event.currentTarget.value as SortingAlgorithm);
     setIsSelecting(false);
   };
 
@@ -31,7 +31,7 @@ export const AlgorithmSelection: React.FC<Props> = ({
     <AlgorithmSelect onMouseLeave={handleMouseLeave}>
       <AlgorithmOption
         onClick={disabled ? undefined : handleActivateSelection}
-        isActive
+        $isActive
       >
         {activeAlgorithm} {!disabled && <i className="fas fa-caret-down"></i>}
       </AlgorithmOption>
@@ -43,7 +43,7 @@ export const AlgorithmSelection: React.FC<Props> = ({
             onClick={handleOptionClick}
             value={algorithm}
             key={algorithm}
-            isActive={false}
+            $isActive={false}
           >
             {algorithm}
           </AlgorithmOption>

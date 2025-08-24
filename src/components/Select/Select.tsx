@@ -43,7 +43,7 @@ export const Select: React.FC<Props> = ({
           <Button
             key={option.value}
             onClick={() => onChange(option.value)}
-            isActive={activeOption === option.value}
+            $isActive={activeOption === option.value}
             disabled={disabled}
           >
             {option.label}

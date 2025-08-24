@@ -16,14 +16,16 @@ export const Main = styled.main`
   height: 100%;
 `;
 
-export const VisualizersGrid = styled.div<{ visualizerCount: VisualizerCount }>`
+export const VisualizersGrid = styled.div<{
+  $visualizerCount: VisualizerCount;
+}>`
   grid-gap: 0.25rem;
   display: grid;
   height: 100%;
 
-  grid-template-columns: ${({ visualizerCount }) =>
-    visualizerCount >= 2 ? "1fr 1fr" : "1fr"};
+  grid-template-columns: ${({ $visualizerCount }) =>
+    $visualizerCount >= 2 ? "1fr 1fr" : "1fr"};
 
-  grid-template-rows: ${({ visualizerCount }) =>
-    visualizerCount === 4 ? "1fr 1fr" : "1fr"};
+  grid-template-rows: ${({ $visualizerCount }) =>
+    $visualizerCount === 4 ? "1fr 1fr" : "1fr"};
 `;

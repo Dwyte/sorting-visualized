@@ -6,9 +6,9 @@ interface Props {
   label?: string;
 }
 
-const A = styled.a<{ hasLabel: boolean }>`
-  ${({ hasLabel }) =>
-    hasLabel &&
+const A = styled.a<{ $hasLabel: boolean }>`
+  ${(props) =>
+    props.$hasLabel &&
     css`
       i {
         margin-right: 0.25rem;
@@ -21,14 +21,14 @@ const A = styled.a<{ hasLabel: boolean }>`
   color: white;
   text-decoration: none;
 
-  :hover {
+  &:hover {
     color: orange;
   }
 `;
 
 export const Anchor: React.FC<Props> = ({ href, label, faClassName }) => {
   return (
-    <A href={href} target="_blank" hasLabel={Boolean(label)}>
+    <A href={href} target="_blank" $hasLabel={Boolean(label)}>
       <i className={faClassName || "fas fa-caret-right"}></i>
       {label}
     </A>

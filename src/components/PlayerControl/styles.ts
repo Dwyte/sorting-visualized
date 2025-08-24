@@ -19,30 +19,31 @@ export const StepProgress = styled.input`
   flex: 1;
 
   // for firefox
-  ::-moz-range-thumb {
+  &::-moz-range-thumb {
     -moz-appearance: none;
     border-radius: 0;
     border: none;
     height: 100%;
     width: 20px;
 
-    :hover {
+    &:hover {
       background: orange;
     }
   }
 
   // for chrome and safari
-  ::-webkit-slider-runnable-track {
+  &::-webkit-slider-runnable-track {
     height: 100%;
+    background: #222;
   }
 
-  ::-webkit-slider-thumb {
+  &::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: white;
     height: 100%;
     width: 20px;
 
-    :hover {
+    &:hover {
       background: orange;
     }
   }

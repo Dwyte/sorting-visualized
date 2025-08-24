@@ -13,7 +13,7 @@ export const BarItem = styled.div<{ value: number; color?: string }>`
   flex: 1;
 
   cursor: pointer;
-  :hover {
+  &:hover {
     background-color: orange;
   }
 `;

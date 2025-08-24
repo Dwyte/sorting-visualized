@@ -4,7 +4,7 @@ import { IsPlayingContext } from "./contexts/IsPlayingContext";
 import { PlayerControl } from "./components/PlayerControl";
 import { Visualizer } from "./components/Visualizer";
 
-import {
+import type {
   Bar,
   AllSortingSteps,
   PlaySpeedConfig,
@@ -42,7 +42,9 @@ const App: React.FC = () => {
     playSpeedConfigs[0]
   );
 
-  const [playTimeout, setPlayTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [playTimeout, setPlayTimeout] = useState<ReturnType<
+    typeof setInterval
+  > | null>(null);
 
   const [arraySizeConfig, setArraySizeConfig] = useState<ArraySizeConfig>(
     arraySizeConfigs[0]
@@ -71,7 +73,7 @@ const App: React.FC = () => {
   }, [arraySizeConfig, arrayVariation]);
 
   useEffect(() => {
-    const newAllSortingSteps: any = {};
+    const newAllSortingSteps: Partial<AllSortingSteps> = {};
     sortingAlgorithms.forEach((algorithm: SortingAlgorithm) => {
       newAllSortingSteps[algorithm] = generateSoringSteps(
         dataToSort,
@@ -239,7 +241,7 @@ const App: React.FC = () => {
 
         <Main>
           <VisualizersGrid
-            visualizerCount={activeAlgorithms.length as VisualizerCount}
+            $visualizerCount={activeAlgorithms.length as VisualizerCount}
           >
             {activeAlgorithms.map((activeAlgorithm, index: number) => (
               <Visualizer
